@@ -2,23 +2,22 @@ import React, {useState, useCallback, useEffect } from 'react';
 import { joinUserAction } from '../reducers/user';
 import { useDispatch, useSelector } from 'react-redux';
 import Router from "next/router";
+import {useInput} from '../util';
 
 const Join = () => {
     const [passwordCheck, setPasswordCheck] = useState("");
     const [term, setTerm] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
     const [termError, setTermError] = useState(false);
-    const { isJoin } = useSelector(state => state.user);
+    const { isJoin, userInfo } = useSelector(state => state.user);
 
-    const useInput = (initValue = null) => {
-        const [value, setter] = useState(initValue);
-        const handler = useCallback(e => {
-            setter(e.target.value);
-        }, []);
-        return [value, handler];
-    };
+    
 
     useEffect(() => {
+        if (userInfo) {
+            alert("이미 로그인된 유저입니다.");
+            Router.push("/");
+        }
         if (isJoin) {
         alert("회원가입이 완료되었으니 로그인해주시기 바랍니다.");
         Router.push("/login");
