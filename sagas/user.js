@@ -12,10 +12,13 @@ import { JOIN_USER_FAILURE, JOIN_USER_REQUEST, JOIN_USER_SUCCESS } from '../redu
 import axios from 'axios';
 
 function joinAPI(joinData) {
-    return axios.post('');
+    console.log('join : ', joinData);
+    return axios.post('/user/join', joinData, {
+        withCredentials: true
+    });
 }
 
-function* join() {
+function* join(action) {
     try{
         const result = yield call(joinAPI, action.data);
         yield put({

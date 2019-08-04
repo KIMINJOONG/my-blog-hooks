@@ -1,11 +1,14 @@
 import React, {useState, useCallback, useEffect } from 'react';
-import {useDispatch, useSelector } from 'react-redux';
+import { joinUserAction } from '../reducers/user';
+import { useDispatch, useSelector } from 'react-redux';
+import Router from "next/router";
 
 const Join = () => {
     const [passwordCheck, setPasswordCheck] = useState("");
     const [term, setTerm] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
     const [termError, setTermError] = useState(false);
+    const { isJoin } = useSelector(state => state.user);
 
     const useInput = (initValue = null) => {
         const [value, setter] = useState(initValue);
@@ -14,6 +17,13 @@ const Join = () => {
         }, []);
         return [value, handler];
     };
+
+    useEffect(() => {
+        if (isJoin) {
+        alert("회원가입이 완료되었으니 로그인해주시기 바랍니다.");
+        Router.push("/login");
+        }
+    }, [isJoin]);
 
     const [id, onChangeId] = useInput("");
     const [password, onChangePassword] = useInput("");
@@ -24,16 +34,13 @@ const Join = () => {
         if(password !== passwordCheck) {
             return setPasswordError(true);
         }
-        if(!term) {
-            return setTermError(true);
-        }
         dispatch(
-            joinAction({
-                userId: id,
+            joinUserAction({
+                id,
                 password,
-            })
+            }),
         );
-    },[password, passwordCheck, term]
+    },[password, passwordCheck]
     );
 
     const onChangePasswordCheck = useCallback(e => {
@@ -62,7 +69,7 @@ const Join = () => {
                 <div>
                     <span>비밀번호 : </span>
                     <input 
-                        type="text" 
+                        type="password" 
                         value={password} 
                         name="userPassword" 
                         onChange={onChangePassword}
