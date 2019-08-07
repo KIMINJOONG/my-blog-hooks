@@ -8,7 +8,7 @@ import {
     take,
     delay
 } from 'redux-saga/effects';
-import { JOIN_USER_FAILURE, JOIN_USER_REQUEST, JOIN_USER_SUCCESS, LOGIN_REUQEST, LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT_SUCCESS, LOGOUT_FAILURE, LOGOUT_REQUEST } from '../reducers/user';
+import { JOIN_USER_FAILURE, JOIN_USER_REQUEST, JOIN_USER_SUCCESS, LOGIN_REUQEST, LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT_SUCCESS, LOGOUT_FAILURE, LOGOUT_REQUEST, USER_DETAIL_FAILURE, USER_DETAIL_SUCCESS, USER_DETAIL_REQUEST } from '../reducers/user';
 import axios from 'axios';
 import cookie from 'react-cookies';
 
@@ -59,7 +59,7 @@ function* login(action) {
 }
 
 function* watchLogin(){
-    yield takeLatest(LOGIN_REUQEST, login);
+    yield takeEvery(LOGIN_REUQEST, login);
 }
 
 function logoutAPI() {
@@ -91,7 +91,7 @@ function* watchLogout(){
 
 
 function userDetailAPI(loginData) {
-    return axios.post('/user/login', loginData, {
+    return axios.post('/user/detail', loginData, {
         withCredentials: true
     });
 }
@@ -100,19 +100,19 @@ function* userDetail(action) {
     try{
         const result = yield call(userDetailAPI, action.data);
         yield put({
-            type: LOGIN_SUCCESS,
+            type: USER_DETAIL_SUCCESS,
             data: result.data
         });
     }catch(error) {
         yield put({
-            type: LOGIN_FAILURE,
+            type: USER_DETAIL_FAILURE,
             error
         });
     }
 }
 
 function* watchUserDetail(){
-    yield takeLatest(LOGIN_REUQEST, userDetail);
+    yield takeLatest(USER_DETAIL_REQUEST, userDetail);
 }
 
 export default function* userSaga() {

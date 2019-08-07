@@ -49,6 +49,7 @@ const reducer = (state = initialState, action) => {
                 break;
             }
             case LOGIN_REUQEST: {
+                draft.userInfo = null;
                 break;
             }
             case LOGIN_SUCCESS: {

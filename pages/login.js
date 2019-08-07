@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import { useInput } from '../util';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginAction, LOGIN_REUQEST } from '../reducers/user';
+import { LOGIN_REUQEST } from '../reducers/user';
 import Router from "next/router";
 import Link from 'next/link';
 
@@ -11,7 +11,7 @@ const Login = () => {
     const dispatch = useDispatch();
     const { userInfo } = useSelector(state => state.user);
 
-    const onSubmit = useCallback(e => {
+    const onSubmitForm = useCallback(e => {
         e.preventDefault();
         dispatch({
             type: LOGIN_REUQEST,
@@ -24,7 +24,6 @@ const Login = () => {
 
     useEffect(() => {
         if (userInfo) {
-        alert("로그인 되었습니다.");
         Router.push("/");
         }
     }, [userInfo]);
@@ -32,7 +31,7 @@ const Login = () => {
 
     return (
         <>
-            <form onSubmit={onSubmit}>
+            <form>
                 <div>
                     <span>아이디 : </span>
                     <input 
@@ -55,7 +54,7 @@ const Login = () => {
                     </Link>
                 </div>
                 <div>
-                    <button onClick={onSubmit}>
+                    <button onClick={onSubmitForm}>
                         로그인
                     </button>
                 </div>
