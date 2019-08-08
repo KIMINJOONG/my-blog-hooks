@@ -21,9 +21,6 @@ const Home = () => {
                     <div>
                         <span>{userInfo.id}님 환영합니다.</span>
                         <span onClick={onLogout}>로그아웃</span>
-                        <Link href="/board">
-                            <a>글쓰기</a>
-                        </Link>
                         <Link href="/boardList">
                             <a>게시판</a>
                         </Link>

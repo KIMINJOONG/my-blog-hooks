@@ -4,6 +4,7 @@ export const initialState = {
     boards: [], // 게시글 리스트
     imagePaths: [], // 미리보기 이미지 경로
     boardDetail: null,
+    isUpload: false,
 };
 
 export const LOAD_BOARD_LIST_REQUEST = 'LOAD_BOARD_LIST_REQUEST';
@@ -32,6 +33,7 @@ const reducer = (state = initialState, action) => {
                 break;
             }
             case UPLOAD_BOARD_SUCCESS: {
+                draft.isUpload = true;
                 draft.boards.push(action.data);
                 break;
             }

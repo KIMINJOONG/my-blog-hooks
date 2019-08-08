@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'; 
 import { LOAD_BOARD_LIST_REQUEST } from '../reducers/board';
-
-
+import Link from 'next/link';
 
 const boardList = () => {
     const dispatch = useDispatch();
@@ -14,8 +13,13 @@ const boardList = () => {
     }, []);
     return (
         <div>
+            <div>
+                <Link href="/board">
+                    <a>글쓰기</a>
+                </Link>
+            </div>
             {boards && boards.map(board => (
-                <div>
+                <div key={board._id}>
                     {board.title}
                 </div>
             ))}

@@ -1,11 +1,13 @@
-import React, { useCallback, }from 'react';
+import React, { useCallback, useEffect }from 'react';
 import { useInput } from '../util';
 import { useDispatch, useSelector } from 'react-redux';
 import { UPLOAD_BOARD_REQUEST } from '../reducers/board';
+import Router from "next/router";
 
 const Board = () => {
     const [ title, onChangeTitle ] = useInput("");
     const [ content, onChangeContent ] = useInput("");
+    const { isUpload } = useSelector(state => state.board);
     const dispatch = useDispatch();
     const onSubmitForm = useCallback(e => {
         e.preventDefault();
@@ -17,6 +19,13 @@ const Board = () => {
             }
         });
     }, [title, content]);
+
+    useEffect(() => {
+        if(isUpload) {
+            alert('게시글이 등록되었습니다.');
+            Router.push('/boardList');
+        }
+    })
 
     return (
         <div>
