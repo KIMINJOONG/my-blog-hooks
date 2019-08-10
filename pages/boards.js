@@ -4,6 +4,7 @@ import { LOAD_BOARD_LIST_REQUEST } from '../reducers/board';
 import Link from 'next/link';
 import { ContentHeader } from '../styled/common';
 import styled from 'styled-components';
+import Router from 'next/router';
 
 const BoardsList = styled.div`
     width: 100%;
@@ -44,7 +45,7 @@ const boards = () => {
                 </div>
             </ContentHeader>
             {boards && boards.map(board => (
-                <BoardsList key={board._id}>
+                <BoardsList key={board._id} onClick={() => Router.push(`/boards/${board._id}`)}>
                     <p>{board.title}</p>
                     <p>{board.createdAt}</p>
                 </BoardsList>
