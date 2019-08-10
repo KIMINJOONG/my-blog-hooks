@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
-export const ContentHeader = styled.div`
+export const ContentHeaderContainer = styled.div`
     width: 100%;
-    margin-bottom: 10px;
 
     & div {
         display: inline-block;
@@ -12,9 +11,22 @@ export const ContentHeader = styled.div`
         width: 80%;
     }
 
-    & .menuContainer {
-        width: 20%;
-        text-align: right;
+    & .contentContainer {
+        width: 100%;
+        border-top: 1px solid #066306;
+        border-bottom: 1px solid #cecece;
+
+        & .title {
+            width: 80%;
+
+        }
+        & .date {
+            width: 20%;
+        }
+
+        & p {
+            text-align: center;
+        }
     }
 
     & p {
@@ -31,8 +43,7 @@ export const ContentHeader = styled.div`
         font-size: 20px;
     }
 
-    & .menu {
-        text-align: left;
-    }
 `;
+
+
 

@@ -8,7 +8,7 @@ import Router from 'next/router';
 
 const Header = styled.div`
     width: 100%;
-    border-bottom: 1px solid #707070;
+    border-bottom: 1px solid #066306;
     margin-bottom: 10px;
 
     & > div {
@@ -35,7 +35,7 @@ const Header = styled.div`
     & .menu > ul > li {
         font-size: 20px;
         display: inline-block;
-        width: 20%;
+        width: 25%;
         text-align: center;
         color: #707070;
         cursor: pointer;
@@ -77,7 +77,6 @@ const AppLayout = ({ children }) => {
                     </div>
                     <div className="menu">
                         <ul>
-                            <li>주변제휴점</li>
                             <li>이용방법</li>
                             <li>고객센터</li>
                             <li onClick={() => Router.push('/boards')}>공지사항</li>
