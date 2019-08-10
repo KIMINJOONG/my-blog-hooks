@@ -8,23 +8,37 @@ export const ContentHeaderContainer = styled.div`
     }
 
     & .topContainer {
-        width: 80%;
+        width: 100%;
+        height: 50px;
+
+        & div {
+            float: right;
+            cursor: pointer;
+        }
+    }
+
+    & .top {
+        margin: 0px;
+        font-size: 20px;
     }
 
     & .contentContainer {
         width: 100%;
+        height: 40px;
         border-top: 1px solid #066306;
         border-bottom: 1px solid #cecece;
 
         & .title {
             width: 80%;
-
+            line-height: 40px;
         }
         & .date {
             width: 20%;
+            line-height: 40px;
         }
 
         & p {
+            margin: 0px;
             text-align: center;
         }
     }
@@ -39,9 +53,7 @@ export const ContentHeaderContainer = styled.div`
         color: #707070;
     }
 
-    & .top {
-        font-size: 20px;
-    }
+    
 
 `;
 

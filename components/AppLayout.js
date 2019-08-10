@@ -1,93 +1,66 @@
 import React, { useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import Link from 'next/link';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { LOGOUT_REQUEST } from '../reducers/user';
 import Router from 'next/router';
 
-const Header = styled.div`
+const Container = styled.div`
+    width: 80%;
+    height: auto;
+    margin: 0 auto;
+`;
+const Header = styled.header`
     width: 100%;
-    border-bottom: 1px solid #066306;
-    margin-bottom: 10px;
+    height: 90px;
+    cursor: pointer;
+     & p {
+         font-size: 1.3rem;
+         text-align: center;
+         line-height: 90px;
+         color: #707070;
+         margin: 0px;
+     }
+`;
 
-    & > div {
-        display: inline-block;
-        height: 80px;
-        line-height: 80px;
-    }
+const Side = styled.aside`
+    float: left;
+    width: 20%;
+    height: 600px;
 
-    & .logo {
-        width: 40%;
-        cursor: pointer;
-    }
-
-    & .menu {
-        width: 60%;
-    }
-
-    & .menu > ul {
-        list-style: none;
+    & ul {
         margin: 0px;
         padding: 0px;
     }
-
-    & .menu > ul > li {
-        font-size: 20px;
-        display: inline-block;
-        width: 25%;
-        text-align: center;
-        color: #707070;
+    & li {
+        margin-top: 10px;
+        margin-left: 10px;
+        list-style: none;
         cursor: pointer;
     }
 `;
 
-const Logo = styled.span`
-    font-size: 4rem;
-    font-family: SegoeUI;
-    font-weight: normal;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 1.33;
-    letter-spacing: normal;
-    text-align: left;
-    color: #707070;
-`;
-
-const Content = styled.div`
+const Content = styled.section`
+    float: right;
     width: 80%;
-    margin: 0 auto;
+    height: 600px;
 `;
 
 const AppLayout = ({ children }) => {
-    const { userInfo } = useSelector(state => state.user);
-    const dispatch = useDispatch();
-    const onLogout = useCallback(() => {
-        dispatch({
-            type: LOGOUT_REQUEST
-        });
-    }, []);
     return (
-            <div>
-                <Header>
-                    <div className="logo">
-                        <Link href="/">
-                            <Logo>DRINKER</Logo>
-                        </Link>
-                    </div>
-                    <div className="menu">
-                        <ul>
-                            <li>이용방법</li>
-                            <li>고객센터</li>
-                            <li onClick={() => Router.push('/boards')}>공지사항</li>
-                            {userInfo ? <li onClick={onLogout}>로그아웃</li> : <li onClick={() => Router.push('/login')}>로그인</li>}
-                        </ul>
-                    </div>
-                </Header>
+        <Container>
+            <Header onClick={() => Router.push('/')}>
+                <p>KOHUBI'S BLOG</p>
+            </Header>
+            <Side>
+                <h3>category</h3>
+                <ul>
+                    <li onClick={() => Router.push('/boards')}>Today I Learned</li>
+                </ul>
+            </Side>
             <Content>
                 {children}
             </Content>
-        </div>
+            
+        </Container>
     )
 };
 

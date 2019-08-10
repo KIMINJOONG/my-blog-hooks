@@ -9,6 +9,7 @@ const BoardsList = styled.div`
     width: 100%;
     height: 51px;
     border-bottom: solid 1px #cecece;
+    cursor: pointer;
 
     & div {
         display: inline-block;
@@ -35,6 +36,28 @@ const BoardsList = styled.div`
     }
 `;
 
+const ContentContainer = styled.div`
+    width: 100%;
+    height: 480px;
+`;
+
+
+const SearchContainer = styled.div`
+    width: 100%;
+    height: 30px;
+    & > div {
+        display: inline-block;
+        position: absolute;
+        left: 50%;
+        margin-left: -30px;
+    }
+
+    & > div > input {
+        width: 200px;
+        height: 20px;
+    }
+`;
+
 
 
 const boards = () => {
@@ -48,17 +71,26 @@ const boards = () => {
 
     return (
         <div>
-            <ContentHeader bigTitle={"공지사항"} smallTitle={"다양한 이벤트와 공지사항을 받아보세요."}/>
-            {boards && boards.map(board => (
-                <BoardsList key={board._id} onClick={() => Router.push(`/boards/${board._id}`)}>
-                    <div className="title">
-                        <p>{board.title}</p>
-                    </div>
-                    <div className="date">
-                        <p>{board.createdAt.length < 10 ? board.createdAt : board.createdAt.substring(0, 10)}</p>
-                    </div>
-                </BoardsList>
-            ))}
+            <ContentHeader bigTitle={"Today I Learned"} />
+            <ContentContainer>
+                {boards && boards.map(board => (
+                    <BoardsList key={board._id} onClick={() => Router.push(`/boards/${board._id}`)}>
+                        <div className="title">
+                            <p>{board.title}</p>
+                        </div>
+                        <div className="date">
+                            <p>{board.createdAt.length < 10 ? board.createdAt : board.createdAt.substring(0, 10)}</p>
+                        </div>
+                    </BoardsList>
+                ))}
+            </ContentContainer>
+            
+            <SearchContainer>
+                <div>
+                    <input type="text" placeholder={"검색어를 입력해주세요."} />
+                </div>
+            </SearchContainer>
+            
         </div>
     )
 }
