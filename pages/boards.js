@@ -9,6 +9,7 @@ const BoardsList = styled.div`
     width: 100%;
     height: 70px;
     border: solid 1px #707070;
+    margin-bottom: 10px;
 
     & p {
         text-align: left;

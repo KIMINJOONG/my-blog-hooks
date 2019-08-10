@@ -19,6 +19,7 @@ const Header = styled.div`
 
     & .logo {
         width: 40%;
+        cursor: pointer;
     }
 
     & .menu {
@@ -79,7 +80,7 @@ const AppLayout = ({ children }) => {
                             <li>주변제휴점</li>
                             <li>이용방법</li>
                             <li>고객센터</li>
-                            <li>공지사항</li>
+                            <li onClick={() => Router.push('/boards')}>공지사항</li>
                             {userInfo ? <li onClick={onLogout}>로그아웃</li> : <li onClick={() => Router.push('/login')}>로그인</li>}
                         </ul>
                     </div>

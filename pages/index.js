@@ -9,7 +9,7 @@ import { LOGOUT_REQUEST } from '../reducers/user';
 const Home = () => {
     return (
         <div>
-            
+            메인
         </div>
     )
 }
