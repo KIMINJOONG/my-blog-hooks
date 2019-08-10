@@ -1,7 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import withRedux from 'next-redux-wrapper';
-import withReduxSaga from 'next-redux-saga';
 import { Provider } from 'react-redux';
 import { createStore, compose, applyMiddleware } from 'redux';
 import reducer from '../reducers';

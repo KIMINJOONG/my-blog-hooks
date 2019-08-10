@@ -16,7 +16,7 @@ function* loadBoard() {
             type: LOAD_BOARD_LIST_SUCCESS,
             data: result.data
         });
-        Router.push('/boardList');
+        Router.push('/boards');
     }catch(error) {
         yield put({
             type: LOAD_BOARD_LIST_FAILURE,
