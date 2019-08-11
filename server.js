@@ -27,7 +27,7 @@ app.prepare().then(() => {
             secure: false,
         }
     }));
-    server.get('/boards/:boards_id', (req, res)=> {
+    server.get('/board/:id', (req, res)=> {
         return app.render(req, res, '/boardDetail', { id: req.params.id });
     });
     

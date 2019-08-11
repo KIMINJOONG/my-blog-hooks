@@ -1,5 +1,6 @@
 import React from 'react';
 import withRedux from 'next-redux-wrapper';
+import withReduxSaga from 'next-redux-saga'; // 서버사이드렌더링시 필수
 import { Provider } from 'react-redux';
 import { createStore, compose, applyMiddleware } from 'redux';
 import reducer from '../reducers';
@@ -8,8 +9,9 @@ import rootSaga from '../sagas';
 import createSagaMiddleware from "@redux-saga/core";
 import Helmet from 'react-helmet';
 import { Container } from 'next/app';
+import axios from 'axios';
 
-const myBlog = ({ Component, store, }) => {
+const myBlog = ({ Component, store, pageProps }) => {
     return (
         <Container>
             <Provider store={store}>
@@ -19,12 +21,27 @@ const myBlog = ({ Component, store, }) => {
                 >
                 </Helmet>
                 <AppLayout>
-                    <Component />
+                    <Component {...pageProps} />
                 </AppLayout>
             </Provider>
         </Container>
     );
 };
+
+myBlog.getInitialProps = async(context) => {
+    const { ctx, Component } = context;
+    let pageProps = {};
+    const state = ctx.store.getState();
+    const cookie = ctx.isServer ? ctx.req.headers.cookie : '';
+    axios.defaults.headers.Cookie = '';
+    if (ctx.isServer && cookie) {
+        axios.defaults.headers.Cookie = cookie;
+    }
+    if (Component.getInitialProps) {
+        pageProps = await Component.getInitialProps(ctx) || {};
+    }
+    return { pageProps };
+}
 
 
 
@@ -42,8 +59,8 @@ const configureStore = (initialState, options) => {
               : f => f
           );
     const store = createStore(reducer, initialState, enhancer);
-    sagaMiddleware.run(rootSaga);
+    store.sagaTask = sagaMiddleware.run(rootSaga); // 이부분도 서버사이드 렌더링
     return store;
   };
   
-  export default withRedux(configureStore)(myBlog); //서버사이드 렌더링 withReduxSaga추가
+  export default withRedux(configureStore)(withReduxSaga(myBlog)); //서버사이드 렌더링 withReduxSaga추가

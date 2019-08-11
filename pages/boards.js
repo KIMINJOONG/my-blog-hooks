@@ -74,7 +74,7 @@ const boards = () => {
             <ContentHeader bigTitle={"Today I Learned"} />
             <ContentContainer>
                 {boards && boards.map(board => (
-                    <BoardsList key={board._id} onClick={() => Router.push(`/boards/${board._id}`)}>
+                    <BoardsList key={board._id} onClick={() => Router.push(`/board/${board._id}`)}>
                         <div className="title">
                             <p>{board.title}</p>
                         </div>

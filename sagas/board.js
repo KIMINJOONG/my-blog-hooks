@@ -1,5 +1,5 @@
 import { all, fork, takeLatest, put, call } from 'redux-saga/effects';
-import { LOAD_BOARD_LIST_REQUEST, LOAD_BOARD_LIST_SUCCESS, LOAD_BOARD_LIST_FAILURE, UPLOAD_BOARD_REQUEST, UPLOAD_BOARD_FAILURE, UPLOAD_BOARD_SUCCESS } from '../reducers/board';
+import { LOAD_BOARD_LIST_REQUEST, LOAD_BOARD_LIST_SUCCESS, LOAD_BOARD_LIST_FAILURE, UPLOAD_BOARD_REQUEST, UPLOAD_BOARD_FAILURE, UPLOAD_BOARD_SUCCESS, LOAD_BOARD_DETAIL_REQUEST, LOAD_BOARD_DETAIL_SUCCESS, LOAD_BOARD_DETAIL_FAILURE } from '../reducers/board';
 import axios from 'axios';
 import Router from "next/router";
 
@@ -57,9 +57,37 @@ function* watchUploadBoard() {
     yield takeLatest(UPLOAD_BOARD_REQUEST ,uploadBoard);
 }
 
+
+
+function loadBoardDetailAPI(boardId) {
+    return axios.get(`/board/${boardId}`);
+}
+
+function* loadBoardDetail(action) {
+    try{
+        const result = yield call(loadBoardDetailAPI, action.data);
+        yield put({
+            type: LOAD_BOARD_DETAIL_SUCCESS,
+            data: result.data
+        })
+
+    }catch(error){
+        console.log('error' ,error);
+        yield put({
+            type: LOAD_BOARD_DETAIL_FAILURE,
+            error
+        })
+    }
+}
+
+function* watchLoadBoardDetail() {
+    yield takeLatest(LOAD_BOARD_DETAIL_REQUEST ,loadBoardDetail);
+}
+
 export default function* boardSaga() {
     yield all([
         fork(watchLoadBoards),
         fork(watchUploadBoard),
+        fork(watchLoadBoardDetail),
     ]);
 }

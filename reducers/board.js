@@ -7,6 +7,10 @@ export const initialState = {
     isUpload: false,
 };
 
+export const LOAD_BOARD_DETAIL_REQUEST = 'LOAD_BOARD_DETAIL_REQUEST';
+export const LOAD_BOARD_DETAIL_SUCCESS = 'LOAD_BOARD_DETAIL_SUCCESS';
+export const LOAD_BOARD_DETAIL_FAILURE = 'LOAD_BOARD_DETAIL_FAILURE';
+
 export const LOAD_BOARD_LIST_REQUEST = 'LOAD_BOARD_LIST_REQUEST';
 export const LOAD_BOARD_LIST_SUCCESS = 'LOAD_BOARD_LIST_SUCCESS';
 export const LOAD_BOARD_LIST_FAILURE = 'LOAD_BOARD_LIST_FAILURE';
@@ -19,6 +23,16 @@ export const UPLOAD_BOARD_FAILURE = 'UPLOAD_BOARD_FAILURE';
 const reducer = (state = initialState, action) => {
     return produce(state, (draft) => {
         switch(action.type) {
+            case LOAD_BOARD_DETAIL_REQUEST: {
+                break;
+            }
+            case LOAD_BOARD_DETAIL_SUCCESS: {
+                draft.boardDetail = action.data;
+                break;
+            }
+            case LOAD_BOARD_DETAIL_FAILURE: {
+                break;
+            }
             case LOAD_BOARD_LIST_REQUEST: {
                 break;
             }
