@@ -1,7 +1,9 @@
 import React, { useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Router from 'next/router';
+import { LOGOUT_REQUEST } from '../reducers/user';
 
 const Container = styled.div`
     width: 80%;
@@ -12,12 +14,18 @@ const Header = styled.header`
     width: 100%;
     height: 90px;
     cursor: pointer;
-     & p {
+     & .myHome {
+         line-height: 46px;
          font-size: 1.3rem;
          text-align: center;
-         line-height: 90px;
          color: #707070;
          margin: 0px;
+     }
+
+     & > div > div {
+         text-align: right;
+         color: #707070;
+         cursor: pointer;
      }
 `;
 
@@ -45,10 +53,31 @@ const Content = styled.section`
 `;
 
 const AppLayout = ({ children }) => {
+    const dispatch = useDispatch();
+    const onLogout = useCallback(() => {
+        dispatch({
+            type: LOGOUT_REQUEST
+        });
+    }, []);
+    const { userInfo } = useSelector(state => state.user);
     return (
         <Container>
             <Header onClick={() => Router.push('/')}>
-                <p>KOHUBI'S BLOG</p>
+                <div>
+                    <p className="myHome">KOHUBI'S BLOG</p>
+                    {
+                        userInfo ? (
+                            <div onClick={ () => Router.push('/login') }>
+                                <span>로그인</span>
+                            </div>
+                        ) : (
+                            <div onClick={ onLogout }>
+                                <span>로그아웃</span>
+                            </div>
+                        )
+                    }
+                    
+                </div>
             </Header>
             <Side>
                 <h3>category</h3>
