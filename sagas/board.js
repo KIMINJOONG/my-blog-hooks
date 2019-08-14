@@ -1,5 +1,5 @@
 import { all, fork, takeLatest, put, call } from 'redux-saga/effects';
-import { LOAD_BOARD_LIST_REQUEST, LOAD_BOARD_LIST_SUCCESS, LOAD_BOARD_LIST_FAILURE, UPLOAD_BOARD_REQUEST, UPLOAD_BOARD_FAILURE, UPLOAD_BOARD_SUCCESS, LOAD_BOARD_DETAIL_REQUEST, LOAD_BOARD_DETAIL_SUCCESS, LOAD_BOARD_DETAIL_FAILURE } from '../reducers/board';
+import { LOAD_BOARD_LIST_REQUEST, LOAD_BOARD_LIST_SUCCESS, LOAD_BOARD_LIST_FAILURE, UPLOAD_BOARD_REQUEST, UPLOAD_BOARD_FAILURE, UPLOAD_BOARD_SUCCESS, LOAD_BOARD_DETAIL_REQUEST, LOAD_BOARD_DETAIL_SUCCESS, LOAD_BOARD_DETAIL_FAILURE, DELETE_BOARD_SUCCESS, DELETE_BOARD_FAILURE, DELETE_BOARD_REQUEST } from '../reducers/board';
 import axios from 'axios';
 import Router from "next/router";
 
@@ -84,10 +84,40 @@ function* watchLoadBoardDetail() {
     yield takeLatest(LOAD_BOARD_DETAIL_REQUEST ,loadBoardDetail);
 }
 
+function deleteBoardAPI(boardId) {
+    return axios.delete(`/board/delete/${boardId}`, {
+        withCredentials: true
+    });
+}
+
+function* deleteBoard(action) {
+    try{
+        const result = yield call(deleteBoardAPI, action.data);
+        yield put({
+            type: DELETE_BOARD_SUCCESS,
+            data: result.data
+        })
+
+    }catch(error){
+        console.log('error' ,error);
+        yield put({
+            type: DELETE_BOARD_FAILURE,
+            error
+        })
+    }
+}
+
+function* watchDeleteBoard() {
+    yield takeLatest(DELETE_BOARD_REQUEST ,deleteBoard);
+}
+
+
+
 export default function* boardSaga() {
     yield all([
         fork(watchLoadBoards),
         fork(watchUploadBoard),
         fork(watchLoadBoardDetail),
+        fork(watchDeleteBoard)
     ]);
 }

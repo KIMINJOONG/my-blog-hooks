@@ -1,7 +1,8 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { LOAD_BOARD_DETAIL_REQUEST } from '../reducers/board';
+import React, { useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { LOAD_BOARD_DETAIL_REQUEST, DELETE_BOARD_REQUEST } from '../reducers/board';
 import styled from 'styled-components';
+import Router from 'next/router';
 
 const ButtonContainer = styled.div`
 
@@ -9,7 +10,16 @@ const ButtonContainer = styled.div`
 
 const boardDetail = ({}) => {
     const { boardDetail } = useSelector(state => state.board);
+    const dispatch = useDispatch();
 
+    const onDeleteBoard = useCallback(boardId => () => {
+        dispatch({
+          type: DELETE_BOARD_REQUEST,
+          data: boardId
+        });
+        alert('삭제되었습니다.');
+        Router.push('/boards');
+      });
 
     return (
         <div>
@@ -20,7 +30,7 @@ const boardDetail = ({}) => {
                         <p>{boardDetail.content}</p>
                         <ButtonContainer>
                             <button>수정</button>
-                            <button>삭제</button>
+                            <button onClick={onDeleteBoard(boardDetail._id)}>삭제</button>
                         </ButtonContainer>
                     </div>
                     

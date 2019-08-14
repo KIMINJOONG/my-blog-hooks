@@ -19,6 +19,10 @@ export const UPLOAD_BOARD_REQUEST = 'UPLOAD_BOARD_REQUEST';
 export const UPLOAD_BOARD_SUCCESS = 'UPLOAD_BOARD_SUCCESS';
 export const UPLOAD_BOARD_FAILURE = 'UPLOAD_BOARD_FAILURE';
 
+export const DELETE_BOARD_REQUEST = 'DELETE_BOARD_REQUEST';
+export const DELETE_BOARD_SUCCESS = 'DELETE_BOARD_SUCCESS';
+export const DELETE_BOARD_FAILURE = 'DELETE_BOARD_FAILURE';
+
 
 const reducer = (state = initialState, action) => {
     return produce(state, (draft) => {
@@ -52,6 +56,15 @@ const reducer = (state = initialState, action) => {
                 break;
             }
             case UPLOAD_BOARD_FAILURE: {
+                break;
+            }
+            case DELETE_BOARD_REQUEST: {
+                break;
+            }
+            case DELETE_BOARD_SUCCESS: {
+                break;
+            }
+            case DELETE_BOARD_FAILURE: {
                 break;
             }
             default: {
