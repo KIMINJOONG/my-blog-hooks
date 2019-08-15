@@ -60,19 +60,21 @@ const AppLayout = ({ children }) => {
         });
     }, []);
     const { userInfo } = useSelector(state => state.user);
+    console.log(userInfo);
     return (
         <Container>
-            <Header onClick={() => Router.push('/')}>
+            <Header>
                 <div>
-                    <p className="myHome">KOHUBI'S BLOG</p>
+                    <p className="myHome" onClick={() => Router.push('/')}>KOHUBI'S BLOG</p>
                     {
                         userInfo ? (
-                            <div onClick={ () => Router.push('/login') }>
-                                <span>로그인</span>
-                            </div>
-                        ) : (
                             <div onClick={ onLogout }>
                                 <span>로그아웃</span>
+                            </div>
+                        ) : (
+                            
+                            <div onClick={ () => Router.push('/login') }>
+                                <span>로그인</span>
                             </div>
                         )
                     }

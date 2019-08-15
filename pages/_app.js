@@ -31,6 +31,7 @@ const myBlog = ({ Component, store, pageProps }) => {
 
 myBlog.getInitialProps = async(context) => {
     const { ctx, Component } = context;
+    console.log(ctx);
     let pageProps = {};
     const state = ctx.store.getState();
     const cookie = ctx.isServer ? ctx.req.headers.cookie : '';

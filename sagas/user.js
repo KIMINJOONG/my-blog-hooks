@@ -91,14 +91,14 @@ function* watchLogout(){
 
 
 function userDetailAPI(loginData) {
-    return axios.post('/user/detail', loginData, {
+    return axios.post('/user/detail', {}, {
         withCredentials: true
     });
 }
 
 function* userDetail(action) {
     try{
-        const result = yield call(userDetailAPI, action.data);
+        const result = yield call(userDetailAPI);
         yield put({
             type: USER_DETAIL_SUCCESS,
             data: result.data

@@ -3,6 +3,7 @@ import { useInput } from '../util';
 import { useDispatch, useSelector } from 'react-redux';
 import { UPLOAD_BOARD_REQUEST } from '../reducers/board';
 import Router from "next/router";
+import BoardForm from '../components/BoardForm';
 
 const Board = () => {
     const [ title, onChangeTitle ] = useInput("");
@@ -29,26 +30,13 @@ const Board = () => {
 
     return (
         <div>
-            <form onSubmit={onSubmitForm}>
-                <div>
-                    <input 
-                        type="text"
-                        name="title"
-                        value={title}
-                        onChange={onChangeTitle}
-                    />
-                </div>
-                <div>
-                    <textarea 
-                        name="content"
-                        value={content}
-                        onChange={onChangeContent}
-                    />
-                </div>
-                <button>
-                    게시글 등록
-                </button>
-            </form>
+            <BoardForm 
+                onChangeTitle={onChangeTitle}
+                onChangeContent={onChangeContent}
+                onSubmitForm={onSubmitForm}
+                title={title}
+                content={content}
+            />
             
         </div>
     )
