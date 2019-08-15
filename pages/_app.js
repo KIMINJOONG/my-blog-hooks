@@ -10,6 +10,7 @@ import createSagaMiddleware from "@redux-saga/core";
 import Helmet from 'react-helmet';
 import { Container } from 'next/app';
 import axios from 'axios';
+import { USER_DETAIL_REQUEST } from '../reducers/user';
 
 const myBlog = ({ Component, store, pageProps }) => {
     return (
@@ -37,6 +38,11 @@ myBlog.getInitialProps = async(context) => {
     if (ctx.isServer && cookie) {
         axios.defaults.headers.Cookie = cookie;
     }
+    if (!state.user.me) {
+        ctx.store.dispatch({
+          type: USER_DETAIL_REQUEST,
+        });
+      }
     if (Component.getInitialProps) {
         pageProps = await Component.getInitialProps(ctx) || {};
     }
