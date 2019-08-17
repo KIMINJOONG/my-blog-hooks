@@ -29,7 +29,7 @@ const boardDetail = ({}) => {
                         <p>{boardDetail.title}</p>
                         <p>{boardDetail.content}</p>
                         <ButtonContainer>
-                            <button>수정</button>
+                            <button onClick={() => Router.push(`/board/${boardDetail._id}/update`)}>수정</button>
                             <button onClick={onDeleteBoard(boardDetail._id)}>삭제</button>
                         </ButtonContainer>
                     </div>

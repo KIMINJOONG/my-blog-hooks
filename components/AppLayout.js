@@ -60,7 +60,6 @@ const AppLayout = ({ children }) => {
         });
     }, []);
     const { userInfo } = useSelector(state => state.user);
-    console.log(userInfo);
     return (
         <Container>
             <Header>

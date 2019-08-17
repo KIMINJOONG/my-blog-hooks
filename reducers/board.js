@@ -5,7 +5,12 @@ export const initialState = {
     imagePaths: [], // 미리보기 이미지 경로
     boardDetail: null,
     isUpload: false,
+    isModify: false,
 };
+
+export const MODIFY_BOARD_REQUEST = 'MODIFY_BOARD_REQUEST';
+export const MODIFY_BOARD_SUCCESS = 'MODIFY_BOARD_SUCCESS';
+export const MODIFY_BOARD_FAILURE = 'MODIFY_BOARD_FAILURE';
 
 export const LOAD_BOARD_DETAIL_REQUEST = 'LOAD_BOARD_DETAIL_REQUEST';
 export const LOAD_BOARD_DETAIL_SUCCESS = 'LOAD_BOARD_DETAIL_SUCCESS';
@@ -65,6 +70,16 @@ const reducer = (state = initialState, action) => {
                 break;
             }
             case DELETE_BOARD_FAILURE: {
+                break;
+            }
+            case MODIFY_BOARD_REQUEST: {
+                break;
+            }
+            case MODIFY_BOARD_SUCCESS: {
+                draft.isModify = true;
+                break;
+            }
+            case MODIFY_BOARD_FAILURE: {
                 break;
             }
             default: {

@@ -1,5 +1,5 @@
 import { all, fork, takeLatest, put, call } from 'redux-saga/effects';
-import { LOAD_BOARD_LIST_REQUEST, LOAD_BOARD_LIST_SUCCESS, LOAD_BOARD_LIST_FAILURE, UPLOAD_BOARD_REQUEST, UPLOAD_BOARD_FAILURE, UPLOAD_BOARD_SUCCESS, LOAD_BOARD_DETAIL_REQUEST, LOAD_BOARD_DETAIL_SUCCESS, LOAD_BOARD_DETAIL_FAILURE, DELETE_BOARD_SUCCESS, DELETE_BOARD_FAILURE, DELETE_BOARD_REQUEST } from '../reducers/board';
+import { LOAD_BOARD_LIST_REQUEST, LOAD_BOARD_LIST_SUCCESS, LOAD_BOARD_LIST_FAILURE, UPLOAD_BOARD_REQUEST, UPLOAD_BOARD_FAILURE, UPLOAD_BOARD_SUCCESS, LOAD_BOARD_DETAIL_REQUEST, LOAD_BOARD_DETAIL_SUCCESS, LOAD_BOARD_DETAIL_FAILURE, DELETE_BOARD_SUCCESS, DELETE_BOARD_FAILURE, DELETE_BOARD_REQUEST, MODIFY_BOARD_SUCCESS, MODIFY_BOARD_FAILURE, MODIFY_BOARD_REQUEST } from '../reducers/board';
 import axios from 'axios';
 import Router from "next/router";
 
@@ -55,6 +55,36 @@ function* uploadBoard(action) {
 
 function* watchUploadBoard() {
     yield takeLatest(UPLOAD_BOARD_REQUEST ,uploadBoard);
+}
+
+
+
+
+function modifyBoardAPI(modifyBoardData) {
+    return axios.put(`/board/${modifyBoardData.boardId}`, modifyBoardData, {
+        withCredentials: true
+    });
+}
+
+function* modifyBoard(action) {
+    try{
+        const result = yield call(modifyBoardAPI, action.data);
+        yield put({
+            type: MODIFY_BOARD_SUCCESS,
+            data: result.data
+        })
+
+    }catch(error){
+        console.log('error' ,error);
+        yield put({
+            type: MODIFY_BOARD_FAILURE,
+            error
+        })
+    }
+}
+
+function* watchModifyBoard() {
+    yield takeLatest(MODIFY_BOARD_REQUEST ,modifyBoard);
 }
 
 
@@ -118,6 +148,7 @@ export default function* boardSaga() {
         fork(watchLoadBoards),
         fork(watchUploadBoard),
         fork(watchLoadBoardDetail),
-        fork(watchDeleteBoard)
+        fork(watchDeleteBoard),
+        fork(watchModifyBoard),
     ]);
 }

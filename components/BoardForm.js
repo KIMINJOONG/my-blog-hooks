@@ -3,7 +3,8 @@ const BoardForm = ({
     onChangeContent,
     onSubmitForm,
     title,
-    content
+    content,
+    isUpdate=false
 }) => {
     return(
         <form onSubmit={onSubmitForm}>
@@ -22,9 +23,18 @@ const BoardForm = ({
                     onChange={onChangeContent}
                 />
             </div>
-            <button>
-                게시글 등록
-            </button>
+            {
+                isUpdate ? (
+                    <button>
+                        게시글 수정
+                    </button>
+                ) : (
+                    <button>
+                        게시글 등록
+                    </button>
+                )
+            }
+            
         </form>
     );
 }

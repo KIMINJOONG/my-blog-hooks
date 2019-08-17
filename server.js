@@ -30,6 +30,10 @@ app.prepare().then(() => {
     server.get('/board/:id', (req, res)=> {
         return app.render(req, res, '/boardDetail', { id: req.params.id });
     });
+
+    server.get('/board/:id/update', (req, res) => {
+        return app.render(req, res, '/boardUpdate', { id: req.params.id });
+    })
     
     server.get('*', (req, res) => {
         return handle(req, res);
