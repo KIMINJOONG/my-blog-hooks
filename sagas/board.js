@@ -115,7 +115,7 @@ function* watchLoadBoardDetail() {
 }
 
 function deleteBoardAPI(boardId) {
-    return axios.delete(`/board/delete/${boardId}`, {
+    return axios.delete(`/board/${boardId}`, {
         withCredentials: true
     });
 }

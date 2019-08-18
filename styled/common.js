@@ -52,9 +52,16 @@ export const ContentHeaderContainer = styled.div`
         text-align: left;
         color: #707070;
     }
+`;
 
-    
+export const TitleInput = styled.input`
+    width: 100%;
+    margin-bottom: 10px;
+`;
 
+export const ContentTextArea = styled.textarea`
+    width: 100%;
+    height: 500px;
 `;
 
 

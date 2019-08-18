@@ -27,7 +27,11 @@ const boardDetail = ({}) => {
                 boardDetail && (
                     <div>
                         <p>{boardDetail.title}</p>
-                        <p>{boardDetail.content}</p>
+                        {boardDetail.content.split('\n').map(line => {
+                            return (
+                                <span>{line}<br/></span>
+                            )
+                        })}
                         <ButtonContainer>
                             <button onClick={() => Router.push(`/board/${boardDetail._id}/update`)}>수정</button>
                             <button onClick={onDeleteBoard(boardDetail._id)}>삭제</button>
