@@ -8,7 +8,7 @@ const ButtonContainer = styled.div`
 
 `;
 
-const boardDetail = ({}) => {
+const boardDetail = () => {
     const { boardDetail } = useSelector(state => state.board);
     const dispatch = useDispatch();
 
@@ -27,9 +27,9 @@ const boardDetail = ({}) => {
                 boardDetail && (
                     <div>
                         <p>{boardDetail.title}</p>
-                        {boardDetail.content.split('\n').map(line => {
+                        {boardDetail.content.split('\n').map((line, index) => {
                             return (
-                                <span>{line}<br/></span>
+                                <span key={index}>{line}<br/></span>
                             )
                         })}
                         <ButtonContainer>
@@ -45,6 +45,7 @@ const boardDetail = ({}) => {
 }
 
 boardDetail.getInitialProps = async(context) => {
+    console.log(context.query.id);
     context.store.dispatch({
         type: LOAD_BOARD_DETAIL_REQUEST,
         data: context.query.id

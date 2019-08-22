@@ -21,7 +21,7 @@ app.prepare().then(() => {
     server.use(expressSession({
         resave: false,
         saveUninitialized: false,
-        secret: '',
+        secret: process.env.COOKIE_SECRET,
         cookie: {
             httpOnly: true,
             secure: false,

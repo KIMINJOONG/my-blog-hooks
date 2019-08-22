@@ -90,11 +90,13 @@ function* watchModifyBoard() {
 
 
 function loadBoardDetailAPI(boardId) {
+    console.log(boardId)
     return axios.get(`/board/${boardId}`);
 }
 
 function* loadBoardDetail(action) {
     try{
+        console.log(action.data);
         const result = yield call(loadBoardDetailAPI, action.data);
         yield put({
             type: LOAD_BOARD_DETAIL_SUCCESS,

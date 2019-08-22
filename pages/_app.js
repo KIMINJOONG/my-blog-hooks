@@ -33,10 +33,10 @@ myBlog.getInitialProps = async(context) => {
     const { ctx, Component } = context;
     let pageProps = {};
     const state = ctx.store.getState();
-    const cookie = ctx.isServer ? ctx.req.headers.cookie : '';
-    axios.defaults.headers.Cookie = '';
+    const cookie = ctx.isServer ? ctx.req.hesaders : '';
+    axios.defaults.headers = '';
     if (ctx.isServer && cookie) {
-        axios.defaults.headers.Cookie = cookie;
+        axios.defaults.headers = cookie;
     }
     if (!state.user.me) {
         ctx.store.dispatch({
