@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Router from 'next/router';
 import { LOGOUT_REQUEST } from '../reducers/user';
+import Link from 'next/link';
 
 const Container = styled.div`
     width: 80%;

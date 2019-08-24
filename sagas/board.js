@@ -1,7 +1,6 @@
 import { all, fork, takeLatest, put, call } from 'redux-saga/effects';
 import { LOAD_BOARD_LIST_REQUEST, LOAD_BOARD_LIST_SUCCESS, LOAD_BOARD_LIST_FAILURE, UPLOAD_BOARD_REQUEST, UPLOAD_BOARD_FAILURE, UPLOAD_BOARD_SUCCESS, LOAD_BOARD_DETAIL_REQUEST, LOAD_BOARD_DETAIL_SUCCESS, LOAD_BOARD_DETAIL_FAILURE, DELETE_BOARD_SUCCESS, DELETE_BOARD_FAILURE, DELETE_BOARD_REQUEST, MODIFY_BOARD_SUCCESS, MODIFY_BOARD_FAILURE, MODIFY_BOARD_REQUEST } from '../reducers/board';
 import axios from 'axios';
-import Router from "next/router";
 
 function loadBoardAPI() {
     return axios.get('board/list', {
@@ -16,7 +15,6 @@ function* loadBoard() {
             type: LOAD_BOARD_LIST_SUCCESS,
             data: result.data
         });
-        Router.push('/boards');
     }catch(error) {
         yield put({
             type: LOAD_BOARD_LIST_FAILURE,
@@ -90,13 +88,12 @@ function* watchModifyBoard() {
 
 
 function loadBoardDetailAPI(boardId) {
-    console.log(boardId)
+    console.log('유저 보드 디테일');
     return axios.get(`/board/${boardId}`);
 }
 
 function* loadBoardDetail(action) {
     try{
-        console.log(action.data);
         const result = yield call(loadBoardDetailAPI, action.data);
         yield put({
             type: LOAD_BOARD_DETAIL_SUCCESS,

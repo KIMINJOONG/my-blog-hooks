@@ -5,8 +5,6 @@ import {
     takeEvery,
     call,
     put,
-    take,
-    delay
 } from 'redux-saga/effects';
 import { JOIN_USER_FAILURE, JOIN_USER_REQUEST, JOIN_USER_SUCCESS, LOGIN_REUQEST, LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT_SUCCESS, LOGOUT_FAILURE, LOGOUT_REQUEST, USER_DETAIL_FAILURE, USER_DETAIL_SUCCESS, USER_DETAIL_REQUEST } from '../reducers/user';
 import axios from 'axios';

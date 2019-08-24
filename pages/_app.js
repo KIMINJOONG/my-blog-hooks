@@ -12,7 +12,7 @@ import { Container } from 'next/app';
 import axios from 'axios';
 import { USER_DETAIL_REQUEST } from '../reducers/user';
 
-const myBlog = ({ Component, store, pageProps }) => {
+const MyBlog = ({ Component, store, pageProps }) => {
     return (
         <Container>
             <Provider store={store}>
@@ -29,29 +29,28 @@ const myBlog = ({ Component, store, pageProps }) => {
     );
 };
 
-myBlog.getInitialProps = async(context) => {
+MyBlog.getInitialProps = async (context) => {
     const { ctx, Component } = context;
     let pageProps = {};
     const state = ctx.store.getState();
-    const cookie = ctx.isServer ? ctx.req.hesaders : '';
-    axios.defaults.headers = '';
+    const cookie = ctx.isServer ? ctx.req.headers.cookie : '';
+    axios.defaults.headers.Cookie = '';
     if (ctx.isServer && cookie) {
-        axios.defaults.headers = cookie;
+      axios.defaults.headers.Cookie = cookie;
     }
     if (!state.user.me) {
-        ctx.store.dispatch({
-          type: USER_DETAIL_REQUEST,
-        });
-      }
+      ctx.store.dispatch({
+        type: USER_DETAIL_REQUEST,
+      });
+    }
     if (Component.getInitialProps) {
-        pageProps = await Component.getInitialProps(ctx) || {};
+      pageProps = await Component.getInitialProps(ctx) || {};
     }
     return { pageProps };
-}
-
-
-
-const configureStore = (initialState, options) => {
+    
+};
+  
+  const configureStore = (initialState, options) => {
     const sagaMiddleware = createSagaMiddleware();
     const middlewares = [sagaMiddleware];
     const enhancer =
@@ -69,4 +68,4 @@ const configureStore = (initialState, options) => {
     return store;
   };
   
-  export default withRedux(configureStore)(withReduxSaga(myBlog)); //서버사이드 렌더링 withReduxSaga추가
+  export default withRedux(configureStore)(withReduxSaga(MyBlog)); //서버사이드 렌더링 withReduxSaga추가

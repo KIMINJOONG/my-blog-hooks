@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const expressSession = require('express-session');
 const dotenv = require('dotenv');
+const path = require('path');
 
 const dev = process.env.NODE_ENV !== 'production';
 const prod = process.env.NODE_ENV === 'production';
@@ -21,7 +22,7 @@ app.prepare().then(() => {
     server.use(expressSession({
         resave: false,
         saveUninitialized: false,
-        secret: process.env.COOKIE_SECRET,
+        secret: '',
         cookie: {
             httpOnly: true,
             secure: false,
