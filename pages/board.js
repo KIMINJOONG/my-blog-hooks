@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect }from 'react';
+import { useCallback, useEffect }from 'react';
 import { useInput } from '../util';
 import { useDispatch, useSelector } from 'react-redux';
 import { UPLOAD_BOARD_REQUEST } from '../reducers/board';

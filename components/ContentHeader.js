@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import { ContentHeaderContainer } from '../styled/common';
 import { useSelector } from 'react-redux';
 import Router from 'next/router';
@@ -11,7 +10,7 @@ const ContentHeader = ({bigTitle}) => {
             <div className="topContainer">
                 <p className="top">{bigTitle}</p>
                 {
-                    userInfo && ( 
+                    userInfo && userInfo.id === 'master' && ( 
                         <div>
                             <span onClick={ () => Router.push('/board') }>글쓰기</span>
                         </div>
