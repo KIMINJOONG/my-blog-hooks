@@ -6,6 +6,7 @@ const expressSession = require('express-session');
 const dotenv = require('dotenv');
 const path = require('path');
 const cors = require('cors');
+const helmet = require('helmet');
 
 const dev = process.env.NODE_ENV !== 'production';
 const prod = process.env.NODE_ENV === 'production';
@@ -16,6 +17,7 @@ dotenv.config();
 
 app.prepare().then(() => {
     const server = express();
+    server.use(helmet());
     server.use(morgan('dev'));
     server.use(cors({
         origin: true,
