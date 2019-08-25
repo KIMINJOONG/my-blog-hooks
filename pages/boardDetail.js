@@ -28,7 +28,7 @@ const boardDetail = () => {
             {
                 boardDetail && (
                     <div>
-                        <p>{boardDetail.title}</p>
+                        <h1>{boardDetail.title}</h1>
                         {boardDetail.content.split('\n').map((line, index) => {
                             return (
                                 <span key={index}>{line}<br/></span>
