@@ -11,6 +11,7 @@ const Home = () => {
                 front => react, react-next, redux, react-saga, react-hooks, styled-component<br/>
                 back => node js express framework<br/>
                 db => mongodb<br/>
+                web-server => nginx<br/>
                 etc => webpack, git, jwt, aws ec2<br/>
             </p>
 
