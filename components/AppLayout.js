@@ -6,7 +6,7 @@ import Router from 'next/router';
 import { LOGOUT_REQUEST } from '../reducers/user';
 
 const Container = styled.div`
-    width: 100%;
+    width: 80%;
     height: auto;
     margin: 0 auto;
 `;
