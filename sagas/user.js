@@ -97,7 +97,6 @@ function userDetailAPI() {
 function* userDetail() {
     try{
         const result = yield call(userDetailAPI);
-        console.log(result.data);
         yield put({
             type: USER_DETAIL_SUCCESS,
             data: result.data
