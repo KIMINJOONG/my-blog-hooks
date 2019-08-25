@@ -12,7 +12,6 @@ const Board = () => {
     const dispatch = useDispatch();
     const onSubmitForm = useCallback(e => {
         e.preventDefault();
-        content = content.replace(/(?:\r\n|\r|\n)/g, '<br />');
         dispatch({
             type: UPLOAD_BOARD_REQUEST,
             data: {
