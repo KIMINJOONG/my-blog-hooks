@@ -16,7 +16,6 @@ module.exports = withBundleAnalyzer({
     },
     webpack(config) {
         const prod = process.env.NODE_ENV === 'production';
-        console.log(config);
         return {
             ...config,
             mode: prod ? 'production' : 'development',

@@ -88,7 +88,6 @@ function* watchModifyBoard() {
 
 
 function loadBoardDetailAPI(boardId) {
-    console.log('유저 보드 디테일');
     return axios.get(`/board/${boardId}`);
 }
 
