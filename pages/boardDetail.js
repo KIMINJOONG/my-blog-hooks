@@ -45,6 +45,7 @@ const boardDetail = () => {
 }
 
 boardDetail.getInitialProps = async(context) => {
+    console.log('boardDetail들어옴');
     context.store.dispatch({
         type: LOAD_BOARD_DETAIL_REQUEST,
         data: context.query.id
