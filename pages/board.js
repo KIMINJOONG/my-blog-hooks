@@ -6,8 +6,9 @@ import Router from "next/router";
 import BoardForm from '../components/BoardForm';
 
 const Board = () => {
-    const [ title, onChangeTitle ] = useInput("");
+    const [ title, onChangeTitle] = useInput("");
     const [ content, onChangeContent ] = useInput("");
+    const [ category, onChangeCategory ] = useInput('');
     const { isUpload } = useSelector(state => state.board);
     const dispatch = useDispatch();
     const onSubmitForm = useCallback(e => {
@@ -16,10 +17,11 @@ const Board = () => {
             type: UPLOAD_BOARD_REQUEST,
             data: {
                 title,
-                content
+                content,
+                category
             }
         });
-    }, [title, content]);
+    }, [title, content, category]);
 
     useEffect(() => {
         if(isUpload) {
@@ -33,9 +35,11 @@ const Board = () => {
             <BoardForm 
                 onChangeTitle={onChangeTitle}
                 onChangeContent={onChangeContent}
-                onSubmitForm={onSubmitForm}
+                onChangeCategory={onChangeCategory}
                 title={title}
                 content={content}
+                category={category}
+                onSubmitForm={onSubmitForm}
             />
             
         </div>
