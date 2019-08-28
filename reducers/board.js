@@ -28,6 +28,11 @@ export const DELETE_BOARD_REQUEST = 'DELETE_BOARD_REQUEST';
 export const DELETE_BOARD_SUCCESS = 'DELETE_BOARD_SUCCESS';
 export const DELETE_BOARD_FAILURE = 'DELETE_BOARD_FAILURE';
 
+export const ADD_COMMENT_REQUEST = 'ADD_COMMENT_REQUEST';
+export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS';
+export const ADD_COMMENT_FAILURE = 'ADD_COMMENT_FAILURE';
+
+
 
 const reducer = (state = initialState, action) => {
     return produce(state, (draft) => {
@@ -80,6 +85,15 @@ const reducer = (state = initialState, action) => {
                 break;
             }
             case MODIFY_BOARD_FAILURE: {
+                break;
+            }
+            case ADD_COMMENT_REQUEST: {
+                break;
+            }
+            case ADD_COMMENT_SUCCESS: {
+                break;
+            }
+            case ADD_COMMENT_FAILURE: {
                 break;
             }
             default: {
