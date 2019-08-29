@@ -91,6 +91,7 @@ const reducer = (state = initialState, action) => {
                 break;
             }
             case ADD_COMMENT_SUCCESS: {
+                draft.boardDetail = action.data;
                 break;
             }
             case ADD_COMMENT_FAILURE: {

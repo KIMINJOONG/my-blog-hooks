@@ -142,7 +142,6 @@ function* watchDeleteBoard() {
 
 
 function addCommentAPI(commentData) {
-    console.log('api');
     return axios.post(`/board/${commentData.boardId}/comment`, commentData, {
         withCredentials: true
     });

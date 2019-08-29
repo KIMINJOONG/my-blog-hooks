@@ -53,6 +53,15 @@ const boardDetail = () => {
                                 <span key={index}>{line}<br/></span>
                             )
                         })}
+                        {
+                            boardDetail.comments.map((line, index) => {
+                                return (
+                                    <div>
+                                        <span key={index}>{line}</span>
+                                    </div>
+                                )
+                            })
+                        }
                         <div>
                             <div>
                                 <TextArea value={comment} onChange={onChangeComment} />
