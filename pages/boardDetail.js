@@ -31,16 +31,20 @@ const boardDetail = () => {
       });
 
     const postComment = useCallback(() => {
-        const { router : { query : { id : boardId } } } = Router;
-        dispatch({
-            type: ADD_COMMENT_REQUEST,
-            data: {
-                comment,
-                boardId
-            }
-        });
-        alert('댓글이 등록되었습니다.');
-    }, [comment]);
+        if(userInfo) {
+            const { router : { query : { id : boardId } } } = Router;
+            dispatch({
+                type: ADD_COMMENT_REQUEST,
+                data: {
+                    comment,
+                    boardId
+                }
+            });
+            alert('댓글이 등록되었습니다.');
+        } else {
+            alert('로그인이 필요합니다.');
+        }
+    }, [comment, userInfo]);
 
     return (
         <div>
@@ -53,18 +57,27 @@ const boardDetail = () => {
                                 <span key={index}>{line}<br/></span>
                             )
                         })}
+                        <hr/>
                         {
-                            boardDetail.comments.map((line, index) => {
+                            boardDetail.comments.map((comments, index) => {
                                 return (
-                                    <div>
-                                        <span key={index}>{line}</span>
+                                    <div key={index}>
+                                        <span>{ comments.creator.id } : </span>
+                                        <span>{ comments.text }</span>
                                     </div>
                                 )
                             })
                         }
                         <div>
                             <div>
-                                <TextArea value={comment} onChange={onChangeComment} />
+                                {
+                                    userInfo ? (
+                                        <TextArea value={comment} onChange={onChangeComment} />
+                                    ) : (
+                                        <TextArea value={'로그인이 필요합니다.'} readOnly />
+                                    )
+                                }
+                                
                             </div>
                             <div>
                                 <button onClick={postComment}>등록</button>

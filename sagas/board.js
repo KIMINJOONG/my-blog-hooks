@@ -153,14 +153,14 @@ function* addComment(action) {
         yield put({
             type: ADD_COMMENT_SUCCESS,
             data: result.data
-        })
+        });
 
     }catch(error){
         console.log('error' ,error);
         yield put({
             type: ADD_COMMENT_FAILURE,
             error
-        })
+        });
     }
 }
 

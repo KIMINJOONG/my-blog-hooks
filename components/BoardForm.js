@@ -6,14 +6,14 @@ const BoardForm = ({
     onSubmitForm,
     title,
     content,
-    category,
+    category=-1,
     isUpdate=false
 }) => {
     return(
         <form onSubmit={onSubmitForm}>
             <div>
                 <select onChange={onChangeCategory} value={category}>
-                    <option value="-1" selected>= 선택해주세요 =</option>
+                    <option value="-1">= 선택해주세요 =</option>
                     <option value="1">일상</option>
                     <option value="2">언어</option>
                 </select>
