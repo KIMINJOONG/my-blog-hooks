@@ -33,7 +33,7 @@ app.prepare().then(() => {
         cookie: {
             httpOnly: true,
             secure: false,
-        }
+        },
     }));
     server.get('/board/:id', (req, res)=> {
         return app.render(req, res, '/boardDetail', { id: req.params.id });
