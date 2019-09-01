@@ -34,17 +34,17 @@ MyBlog.getInitialProps = async (context) => {
     let pageProps = {};
     const state = ctx.store.getState();
     const cookie = ctx.isServer ? ctx.req.headers.cookie : '';
-    axios.create({
-      headers: {Cookie : ''},
-      withCredentials: true
-    });
-    // axios.defaults.headers.Cookie = '';
+    // axios.create({
+      // headers: {Cookie : ''},
+      // withCredentials: true
+    // });
+    axios.defaults.headers.Cookie = '';
     if (ctx.isServer && cookie) {
-      axios.create({
-        headers: {Cookie : cookie},
-        withCredentials: true
-      });
-      // axios.defaults.headers.Cookie = cookie;
+      // axios.create({
+        // headers: {Cookie : cookie},
+        // withCredentials: true
+      // });
+      axios.defaults.headers.Cookie = cookie;
     }
     if (!state.user.me) {
       ctx.store.dispatch({
