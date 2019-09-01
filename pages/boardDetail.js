@@ -15,6 +15,10 @@ const TextArea = styled.textarea`
     margin-top: 20px;
 `;
 
+const Pre = styled.pre`
+    font-size: 15px;
+`;
+
 const boardDetail = () => {
     const { boardDetail } = useSelector(state => state.board);
     const { userInfo } = useSelector(state => state.user);
@@ -54,7 +58,7 @@ const boardDetail = () => {
                         <h1>{boardDetail.title}</h1>
                         {boardDetail.content.split('\n').map((line, index) => {
                             return (
-                                <span key={index}>{line}<br/></span>
+                                <Pre key={index}>{line}</Pre>
                             )
                         })}
                         <hr/>
