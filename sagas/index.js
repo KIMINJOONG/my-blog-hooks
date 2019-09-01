@@ -2,9 +2,7 @@ import { all, call } from 'redux-saga/effects';
 import user from './user';
 import board from './board';
 import axios from 'axios';
-import dotenv from 'dotenv';
 
-dotenv.config();
 
 // axios.defaults.baseURL = 'http://ec2-54-180-128-126.ap-northeast-2.compute.amazonaws.com:4000';
 axios.defaults.baseURL = 'http://kohubi.me:4000';
