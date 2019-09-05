@@ -1,8 +1,11 @@
-import {  useSelector } from 'react-redux'; 
+import {  useSelector, dispatch } from 'react-redux'; 
 import { LOAD_BOARD_LIST_REQUEST } from '../reducers/board';
 import styled from 'styled-components';
 import Router from 'next/router';
 import ContentHeader from '../components/ContentHeader';
+import { useCallback } from 'react';
+import { useInput } from '../util';
+import SearchForm from '../components/SearchForm';
 
 const BoardsList = styled.div`
     width: 100%;
@@ -62,11 +65,18 @@ const SearchContainer = styled.div`
 const boards = () => {
     // const dispatch = useDispatch();
     const { boards } = useSelector(state => state.board);
+    const [searchValue, onChangeSearchValue ] = useInput("");
     // useEffect(() => {
     //     dispatch({
     //     type: LOAD_BOARD_LIST_REQUEST,
+    //     data: ''
     //     });
     // }, []);
+
+    const onClickSearch = useCallback(e => {
+        e.preventDefault();
+        Router.push(`/boards?searchValue=${searchValue}`);
+    }, [searchValue]);
 
     return (
         <div>
@@ -85,9 +95,7 @@ const boards = () => {
             </ContentContainer>
             
             <SearchContainer>
-                <div>
-                    <input type="text" placeholder={"검색어를 입력해주세요."} />
-                </div>
+                <SearchForm searchValue={searchValue} onChangeSearchValue={onChangeSearchValue} onClickSearch={onClickSearch} />
             </SearchContainer>
             
         </div>
@@ -100,8 +108,10 @@ const boards = () => {
 // 서버쪽에서 페이지를 처음으로 불러올때 실행
 // 프론트에서 페이지를 넘낟즐때 프론트에서 실행
 boards.getInitialProps = async (context) => {
+    const { query : { searchValue } } = context;
     context.store.dispatch({
       type: LOAD_BOARD_LIST_REQUEST,
+      data: searchValue
     });
 };
 

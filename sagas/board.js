@@ -1,16 +1,17 @@
 import { all, fork, takeLatest, put, call } from 'redux-saga/effects';
-import { LOAD_BOARD_LIST_REQUEST, LOAD_BOARD_LIST_SUCCESS, LOAD_BOARD_LIST_FAILURE, UPLOAD_BOARD_REQUEST, UPLOAD_BOARD_FAILURE, UPLOAD_BOARD_SUCCESS, LOAD_BOARD_DETAIL_REQUEST, LOAD_BOARD_DETAIL_SUCCESS, LOAD_BOARD_DETAIL_FAILURE, DELETE_BOARD_SUCCESS, DELETE_BOARD_FAILURE, DELETE_BOARD_REQUEST, MODIFY_BOARD_SUCCESS, MODIFY_BOARD_FAILURE, MODIFY_BOARD_REQUEST, ADD_COMMENT_REQUEST, ADD_COMMENT_FAILURE, ADD_COMMENT_SUCCESS } from '../reducers/board';
+import { LOAD_BOARD_LIST_REQUEST, LOAD_BOARD_LIST_SUCCESS, LOAD_BOARD_LIST_FAILURE, UPLOAD_BOARD_REQUEST, UPLOAD_BOARD_FAILURE, UPLOAD_BOARD_SUCCESS, LOAD_BOARD_DETAIL_REQUEST, LOAD_BOARD_DETAIL_SUCCESS, LOAD_BOARD_DETAIL_FAILURE, DELETE_BOARD_SUCCESS, DELETE_BOARD_FAILURE, DELETE_BOARD_REQUEST, MODIFY_BOARD_SUCCESS, MODIFY_BOARD_FAILURE, MODIFY_BOARD_REQUEST, ADD_COMMENT_REQUEST, ADD_COMMENT_FAILURE, ADD_COMMENT_SUCCESS, SEARCH_BOARD_LIST_SUCCESS, SEARCH_BOARD_LIST_FAILURE, SEARCH_BOARD_LIST_REQUEST } from '../reducers/board';
 import axios from 'axios';
 
-function loadBoardAPI() {
-    return axios.get('board/list', {
+function loadBoardAPI(searchValue) {
+    console.log(searchValue);
+    return axios.get(`board/list?searchValue=${searchValue}`, {
         withCredentials: true
     });
 }
 
-function* loadBoard() {
+function* loadBoard(action) {
     try {
-        const result = yield call(loadBoardAPI);
+        const result = yield call(loadBoardAPI, action.data);
         yield put({
             type: LOAD_BOARD_LIST_SUCCESS,
             data: result.data
@@ -21,7 +22,6 @@ function* loadBoard() {
             error
         });
     }
-    
 }
 
 function* watchLoadBoards(){
@@ -168,8 +168,6 @@ function* watchAddComment() {
     yield takeLatest(ADD_COMMENT_REQUEST ,addComment);
 }
 
-
-
 export default function* boardSaga() {
     yield all([
         fork(watchLoadBoards),
@@ -177,6 +175,6 @@ export default function* boardSaga() {
         fork(watchLoadBoardDetail),
         fork(watchDeleteBoard),
         fork(watchModifyBoard),
-        fork(watchAddComment),
+        fork(watchAddComment)
     ]);
 }

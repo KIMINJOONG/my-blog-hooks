@@ -32,6 +32,10 @@ export const ADD_COMMENT_REQUEST = 'ADD_COMMENT_REQUEST';
 export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS';
 export const ADD_COMMENT_FAILURE = 'ADD_COMMENT_FAILURE';
 
+export const SEARCH_BOARD_LIST_REQUEST = 'SEARCH_BOARD_LIST_REQUEST';
+export const SEARCH_BOARD_LIST_SUCCESS = 'SEARCH_BOARD_LIST_SUCCESS';
+export const SEARCH_BOARD_LIST_FAILURE = 'SEARCH_BOARD_LIST_FAILURE';
+
 
 
 const reducer = (state = initialState, action) => {
@@ -95,6 +99,16 @@ const reducer = (state = initialState, action) => {
                 break;
             }
             case ADD_COMMENT_FAILURE: {
+                break;
+            }
+            case SEARCH_BOARD_LIST_REQUEST: {
+                break;
+            }
+            case SEARCH_BOARD_LIST_SUCCESS: {
+                draft.boards.push(action.data);
+                break;
+            }
+            case SEARCH_BOARD_LIST_FAILURE: {
                 break;
             }
             default: {
