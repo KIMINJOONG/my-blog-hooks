@@ -1,5 +1,5 @@
 import { all, fork, takeLatest, put, call } from 'redux-saga/effects';
-import { LOAD_BOARD_LIST_REQUEST, LOAD_BOARD_LIST_SUCCESS, LOAD_BOARD_LIST_FAILURE, UPLOAD_BOARD_REQUEST, UPLOAD_BOARD_FAILURE, UPLOAD_BOARD_SUCCESS, LOAD_BOARD_DETAIL_REQUEST, LOAD_BOARD_DETAIL_SUCCESS, LOAD_BOARD_DETAIL_FAILURE, DELETE_BOARD_SUCCESS, DELETE_BOARD_FAILURE, DELETE_BOARD_REQUEST, MODIFY_BOARD_SUCCESS, MODIFY_BOARD_FAILURE, MODIFY_BOARD_REQUEST, ADD_COMMENT_REQUEST, ADD_COMMENT_FAILURE, ADD_COMMENT_SUCCESS, SEARCH_BOARD_LIST_SUCCESS, SEARCH_BOARD_LIST_FAILURE, SEARCH_BOARD_LIST_REQUEST } from '../reducers/board';
+import { LOAD_BOARD_LIST_REQUEST, LOAD_BOARD_LIST_SUCCESS, LOAD_BOARD_LIST_FAILURE, UPLOAD_BOARD_REQUEST, UPLOAD_BOARD_FAILURE, UPLOAD_BOARD_SUCCESS, LOAD_BOARD_DETAIL_REQUEST, LOAD_BOARD_DETAIL_SUCCESS, LOAD_BOARD_DETAIL_FAILURE, DELETE_BOARD_SUCCESS, DELETE_BOARD_FAILURE, DELETE_BOARD_REQUEST, MODIFY_BOARD_SUCCESS, MODIFY_BOARD_FAILURE, MODIFY_BOARD_REQUEST, ADD_COMMENT_REQUEST, ADD_COMMENT_FAILURE, ADD_COMMENT_SUCCESS, SEARCH_BOARD_LIST_SUCCESS, SEARCH_BOARD_LIST_FAILURE, SEARCH_BOARD_LIST_REQUEST, UPLOAD_IMAGES_SUCCESS, UPLOAD_IMAGES_FAILURE, UPLOAD_IMAGES_REQUEST } from '../reducers/board';
 import axios from 'axios';
 
 function loadBoardAPI(searchValue) {
@@ -167,6 +167,32 @@ function* watchAddComment() {
     yield takeLatest(ADD_COMMENT_REQUEST ,addComment);
 }
 
+
+function uploadImagesAPI(formData) {
+    return axios.post(`/boards/images`, formData, {
+      withCredentials: true
+    });
+  }
+  function* uploadImages(action) {
+    try {
+      const result = yield call(uploadImagesAPI, action.data);
+      yield put({
+        type: UPLOAD_IMAGES_SUCCESS,
+        data: result.data // 서버쪽에서 저장된 주소를 리턴받을 예정
+      });
+    } catch (e) {
+      console.error(e);
+      yield put({
+        type: UPLOAD_IMAGES_FAILURE,
+        error: e
+      });
+    }
+  }
+  
+  function* watchUploadImages() {
+    yield takeLatest(UPLOAD_IMAGES_REQUEST, uploadImages);
+  }
+
 export default function* boardSaga() {
     yield all([
         fork(watchLoadBoards),
@@ -174,6 +200,7 @@ export default function* boardSaga() {
         fork(watchLoadBoardDetail),
         fork(watchDeleteBoard),
         fork(watchModifyBoard),
-        fork(watchAddComment)
+        fork(watchAddComment),
+        fork(watchUploadImages)
     ]);
 }

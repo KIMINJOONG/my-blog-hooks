@@ -1,4 +1,5 @@
 import { ContentTextArea,  TitleInput} from '../styled/common';
+import { useCallback } from 'react';
 const BoardForm = ({
     onChangeTitle,
     onChangeContent,
@@ -7,7 +8,10 @@ const BoardForm = ({
     title,
     content,
     category=-1,
-    isUpdate=false
+    isUpdate=false,
+    imageInput,
+    onChangeImages,
+    onClickImageUpload
 }) => {
     return(
         <form onSubmit={onSubmitForm}>
@@ -26,6 +30,10 @@ const BoardForm = ({
                 />
             </div>
             <div>
+                <input type="file"  hidden ref={imageInput} onChange={onChangeImages} />
+                <div onClick={onClickImageUpload}>이미지 업로드</div>
+            </div>
+            <div>
                 <ContentTextArea 
                     name="content"
                     value={content}
@@ -33,17 +41,20 @@ const BoardForm = ({
                     placeholder="내용을 입력해주세요."
                 />
             </div>
-            {
-                isUpdate ? (
-                    <button>
-                        게시글 수정
-                    </button>
-                ) : (
-                    <button>
-                        게시글 등록
-                    </button>
-                )
-            }
+            <div>
+                {
+                    isUpdate ? (
+                        <button>
+                            게시글 수정
+                        </button>
+                    ) : (
+                        <button>
+                            게시글 등록
+                        </button>
+                    )
+                }
+            </div>
+            
             
         </form>
     );

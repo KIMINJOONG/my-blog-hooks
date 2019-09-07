@@ -8,6 +8,10 @@ export const initialState = {
     isModify: false,
 };
 
+export const UPLOAD_IMAGES_REQUEST = 'UPLOAD_IMAGES_REQUEST';
+export const UPLOAD_IMAGES_SUCCESS = 'UPLOAD_IMAGES_SUCCESS';
+export const UPLOAD_IMAGES_FAILURE = 'UPLOAD_IMAGES_FAILURE';
+
 export const MODIFY_BOARD_REQUEST = 'MODIFY_BOARD_REQUEST';
 export const MODIFY_BOARD_SUCCESS = 'MODIFY_BOARD_SUCCESS';
 export const MODIFY_BOARD_FAILURE = 'MODIFY_BOARD_FAILURE';
@@ -41,6 +45,16 @@ export const SEARCH_BOARD_LIST_FAILURE = 'SEARCH_BOARD_LIST_FAILURE';
 const reducer = (state = initialState, action) => {
     return produce(state, (draft) => {
         switch(action.type) {
+            case UPLOAD_IMAGES_REQUEST: {
+                break;
+            }
+            case UPLOAD_IMAGES_SUCCESS: {
+                draft.imagePaths.push(action.data);
+                break;
+            }
+            case UPLOAD_IMAGES_FAILURE: {
+                break;
+            }
             case LOAD_BOARD_DETAIL_REQUEST: {
                 break;
             }

@@ -56,7 +56,7 @@ const boardDetail = () => {
                 boardDetail && (
                     <div>
                         <h1>{boardDetail.title}</h1>
-                        {boardDetail.content.split('\n').map((line, index) => {
+                        {boardDetail.content && boardDetail.content.length > 0 && boardDetail.content.split('\n').map((line, index) => {
                             return (
                                 <Pre key={index}>{line}</Pre>
                             )
