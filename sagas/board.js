@@ -3,8 +3,7 @@ import { LOAD_BOARD_LIST_REQUEST, LOAD_BOARD_LIST_SUCCESS, LOAD_BOARD_LIST_FAILU
 import axios from 'axios';
 
 function loadBoardAPI(searchValue) {
-    console.log(searchValue);
-    return axios.get(`board/list?searchValue=${searchValue}`, {
+    return axios.get(`boards?searchValue=${searchValue}`, {
         withCredentials: true
     });
 }
@@ -29,7 +28,7 @@ function* watchLoadBoards(){
 }
 
 function uploadBoardAPI(uploadBoardData) {
-    return axios.post('/board/upload', uploadBoardData, {
+    return axios.post('/boards/', uploadBoardData, {
         withCredentials: true
     });
 }
@@ -59,7 +58,7 @@ function* watchUploadBoard() {
 
 
 function modifyBoardAPI(modifyBoardData) {
-    return axios.put(`/board/${modifyBoardData.boardId}`, modifyBoardData, {
+    return axios.put(`/boards/${modifyBoardData.boardId}`, modifyBoardData, {
         withCredentials: true
     });
 }
@@ -88,7 +87,7 @@ function* watchModifyBoard() {
 
 
 function loadBoardDetailAPI(boardId) {
-    return axios.get(`/board/${boardId}`);
+    return axios.get(`/boards/${boardId}`);
 }
 
 function* loadBoardDetail(action) {
@@ -113,7 +112,7 @@ function* watchLoadBoardDetail() {
 }
 
 function deleteBoardAPI(boardId) {
-    return axios.delete(`/board/${boardId}`, {
+    return axios.delete(`/boards/${boardId}`, {
         withCredentials: true
     });
 }
@@ -142,7 +141,7 @@ function* watchDeleteBoard() {
 
 
 function addCommentAPI(commentData) {
-    return axios.post(`/board/${commentData.boardId}/comment`, commentData, {
+    return axios.post(`/boards/${commentData.boardId}/comment`, commentData, {
         withCredentials: true
     });
 }
