@@ -169,7 +169,7 @@ function* watchAddComment() {
 
 
 function uploadImagesAPI(formData) {
-    return axios.post(`/boards/images`, formData, {
+    return axios.post('/boards/images', formData, {
       withCredentials: true
     });
   }

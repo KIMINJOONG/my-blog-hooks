@@ -11,7 +11,9 @@ const BoardForm = ({
     isUpdate=false,
     imageInput,
     onChangeImages,
-    onClickImageUpload
+    onClickImageUpload,
+    imagePaths,
+    onRemoveImage
 }) => {
     return(
         <form onSubmit={onSubmitForm}>
@@ -32,6 +34,22 @@ const BoardForm = ({
             <div>
                 <input type="file"  hidden ref={imageInput} onChange={onChangeImages} />
                 <div onClick={onClickImageUpload}>이미지 업로드</div>
+            </div>
+            <div>
+                {imagePaths.map((v, i) => {
+                return (
+                    <div key={v} style={{ display: "inline-block" }}>
+                    <img
+                        src={`http://localhost:4000/${v}`}
+                        style={{ width: "200px" }}
+                        alt={v}
+                    />
+                    <div>
+                        <button onClick={onRemoveImage(i)}>제거</button>
+                    </div>
+                    </div>
+                );
+                })}
             </div>
             <div>
                 <ContentTextArea 

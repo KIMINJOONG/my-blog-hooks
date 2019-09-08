@@ -1,8 +1,7 @@
-import { useCallback, useRef }from 'react';
+import { useCallback, useRef, useEffect }from 'react';
 import { useInput } from '../util';
 import { useDispatch, useSelector } from 'react-redux';
-import { UPLOAD_BOARD_REQUEST, UPLOAD_IMAGES_REQUEST } from '../reducers/board';
-import Router from "next/router";
+import { UPLOAD_BOARD_REQUEST, UPLOAD_IMAGES_REQUEST, REMOVE_IMAGE } from '../reducers/board';
 import BoardForm from '../components/BoardForm';
 
 const Board = () => {
@@ -29,7 +28,6 @@ const Board = () => {
 
 
     const onSubmitForm = useCallback(e => {
-        console.log('submit');
         e.preventDefault();
         const formData = new FormData();
         imagePaths.forEach((i) => {
@@ -45,13 +43,21 @@ const Board = () => {
         
     }, [title, content, category]);
 
-    // useEffect(() => {
-    //     if(isUpload) {
-    //         alert('게시글이 등록되었습니다.');
-    //         Router.push('/boards');
-    //     }
-    // })
+    // 패턴
+  // onRemoveImage(i) 처럼 괄호가 있으면 ()를 한번더 붙여주는게 패턴이다. 기억하기 고차함수라고 한다.
+    const onRemoveImage = useCallback( (index) => () => {
+        dispatch({
+        type: REMOVE_IMAGE,
+        index
+        });
+    }, []);
 
+    useEffect(() => {
+        if(isUpload) {
+            alert('게시글이 등록되었습니다.');
+            Router.push('/boards');
+        }
+    })
     return (
         <div>
             <BoardForm 
@@ -65,6 +71,8 @@ const Board = () => {
                 imageInput={imageInput}
                 onChangeImages={onChangeImages}
                 onClickImageUpload={onClickImageUpload}
+                imagePaths={imagePaths}
+                onRemoveImage={onRemoveImage}
             />
             
         </div>
