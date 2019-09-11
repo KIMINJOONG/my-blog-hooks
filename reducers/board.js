@@ -9,6 +9,10 @@ export const initialState = {
 };
 
 export const REMOVE_IMAGE = "REMOVE_IMAGE";
+export const REMOVE_IMAGE_REQUEST = 'REMOVE_IMAGE_REQUEST';
+export const REMOVE_IMAGE_SUCCESS = 'REMOVE_IMAGE_SUCCESS';
+export const REMOVE_IMAGE_FAILURE = 'REMOVE_IMAGE_FAILURE';
+
 
 export const UPLOAD_IMAGES_REQUEST = 'UPLOAD_IMAGES_REQUEST';
 export const UPLOAD_IMAGES_SUCCESS = 'UPLOAD_IMAGES_SUCCESS';
@@ -47,6 +51,15 @@ export const SEARCH_BOARD_LIST_FAILURE = 'SEARCH_BOARD_LIST_FAILURE';
 const reducer = (state = initialState, action) => {
     return produce(state, (draft) => {
         switch(action.type) {
+            case REMOVE_IMAGE_REQUEST: {
+                break;
+            }
+            case REMOVE_IMAGE_SUCCESS: {
+                break;
+            }
+            case REMOVE_IMAGE_FAILURE: {
+                break;
+            }
             case REMOVE_IMAGE: {
                 const index = draft.imagePaths.findIndex((v, i) => i === action.index);
                 draft.imagePaths.splice(index,1);

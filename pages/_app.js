@@ -30,32 +30,24 @@ const MyBlog = ({ Component, store, pageProps }) => {
 };
 
 MyBlog.getInitialProps = async (context) => {
-    const { ctx, Component } = context;
-    let pageProps = {};
-    const state = ctx.store.getState();
-    const cookie = ctx.isServer ? ctx.req.headers.cookie : '';
-    // axios.create({
-      // headers: {Cookie : ''},
-      // withCredentials: true
-    // });
-    axios.defaults.headers.Cookie = '';
-    if (ctx.isServer && cookie) {
-      // axios.create({
-        // headers: {Cookie : cookie},
-        // withCredentials: true
-      // });
-      axios.defaults.headers.Cookie = cookie;
-    }
-    if (!state.user.me) {
-      ctx.store.dispatch({
-        type: USER_DETAIL_REQUEST,
-      });
-    }
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx) || {};
-    }
-    return { pageProps };
-    
+  const { ctx, Component } = context;
+  let pageProps = {};
+  const state = ctx.store.getState();
+  const cookie = ctx.isServer ? ctx.req.headers.cookie : '';
+  axios.defaults.headers.Cookie = '';
+  if (ctx.isServer && cookie) {
+    axios.defaults.headers.Cookie = cookie;
+  }
+  if (!state.user.me) {
+    ctx.store.dispatch({
+      type: USER_DETAIL_REQUEST,
+    });
+  }
+  if (Component.getInitialProps) {
+    pageProps = await Component.getInitialProps(ctx) || {};
+  }
+  return { pageProps };
+  
 };
   
   const configureStore = (initialState, options) => {

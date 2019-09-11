@@ -19,10 +19,6 @@ app.prepare().then(() => {
     const server = express();
     server.use(helmet());
     server.use(morgan('dev'));
-    server.use(cors({
-        origin: true,
-        credentials: true
-    }));
     server.use(express.json());
     server.use(express.urlencoded({extended: true }));
     server.use(cookieParser(process.env.COOKIE_SECRET));
