@@ -45,7 +45,7 @@ const BoardForm = ({
                         alt={v}
                     />
                     <div>
-                        <button onClick={onRemoveImage(i)}>제거</button>
+                        <span onClick={onRemoveImage(v[i], i)}>제거</span>
                     </div>
                     </div>
                 );

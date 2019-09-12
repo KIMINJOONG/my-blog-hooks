@@ -1,7 +1,7 @@
 import { useCallback, useRef, useEffect }from 'react';
 import { useInput } from '../util';
 import { useDispatch, useSelector } from 'react-redux';
-import { UPLOAD_BOARD_REQUEST, UPLOAD_IMAGES_REQUEST, REMOVE_IMAGE } from '../reducers/board';
+import { UPLOAD_BOARD_REQUEST, UPLOAD_IMAGES_REQUEST, REMOVE_IMAGE, REMOVE_IMAGE_REQUEST } from '../reducers/board';
 import BoardForm from '../components/BoardForm';
 import Router from "next/router";
 
@@ -46,11 +46,21 @@ const Board = () => {
 
     // 패턴
   // onRemoveImage(i) 처럼 괄호가 있으면 ()를 한번더 붙여주는게 패턴이다. 기억하기 고차함수라고 한다.
-    const onRemoveImage = useCallback( (index) => () => {
+    const onRemoveImage = useCallback( (src, index) => () => {
+        let fileName = src.split('images/');
+        fileName = fileName[1];
+        // dispatch({
+        // type: REMOfVE_IMAGE,
+        // index
+        // });
         dispatch({
-        type: REMOVE_IMAGE,
-        index
+            type: REMOVE_IMAGE_REQUEST,
+            data: {
+                fileName,
+                index
+            }
         });
+
     }, []);
 
     useEffect(() => {

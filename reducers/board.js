@@ -55,6 +55,8 @@ const reducer = (state = initialState, action) => {
                 break;
             }
             case REMOVE_IMAGE_SUCCESS: {
+                const index = draft.imagePaths.findIndex((v, i) => i === action.data.index);
+                draft.imagePaths.splice(index,1);
                 break;
             }
             case REMOVE_IMAGE_FAILURE: {
