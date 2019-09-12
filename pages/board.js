@@ -3,6 +3,7 @@ import { useInput } from '../util';
 import { useDispatch, useSelector } from 'react-redux';
 import { UPLOAD_BOARD_REQUEST, UPLOAD_IMAGES_REQUEST, REMOVE_IMAGE } from '../reducers/board';
 import BoardForm from '../components/BoardForm';
+import Router from "next/router";
 
 const Board = () => {
     const [ title, onChangeTitle] = useInput('');
@@ -31,7 +32,7 @@ const Board = () => {
         e.preventDefault();
         const formData = new FormData();
         imagePaths.forEach((i) => {
-        formData.append('image', i);
+            formData.append('fileUrls', i);
         });
         formData.append('content', content);
         formData.append('title', title);

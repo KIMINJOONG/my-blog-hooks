@@ -5,7 +5,6 @@ const cookieParser = require('cookie-parser');
 const expressSession = require('express-session');
 const dotenv = require('dotenv');
 const path = require('path');
-const cors = require('cors');
 const helmet = require('helmet');
 
 const dev = process.env.NODE_ENV !== 'production';

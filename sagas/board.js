@@ -28,7 +28,8 @@ function* watchLoadBoards(){
 }
 
 function uploadBoardAPI(uploadBoardData) {
-    return axios.post('/boards/', uploadBoardData, {
+    console.log(uploadBoardData);
+    return axios.post('/boards', uploadBoardData, {
         withCredentials: true
     });
 }

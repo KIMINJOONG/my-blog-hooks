@@ -38,9 +38,9 @@ const BoardForm = ({
             <div>
                 {imagePaths.map((v, i) => {
                 return (
-                    <div key={v} style={{ display: "inline-block" }}>
+                    <div key={i} style={{ display: "inline-block" }}>
                     <img
-                        src={`http://localhost:4000/${v}`}
+                        src={v}
                         style={{ width: "200px" }}
                         alt={v}
                     />

@@ -35,6 +35,7 @@ MyBlog.getInitialProps = async (context) => {
   const state = ctx.store.getState();
   const cookie = ctx.isServer ? ctx.req.headers.cookie : '';
   axios.defaults.headers.Cookie = '';
+  axios.defaults.withCredentials = true;
   if (ctx.isServer && cookie) {
     axios.defaults.headers.Cookie = cookie;
   }

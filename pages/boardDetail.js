@@ -21,6 +21,7 @@ const Pre = styled.pre`
 
 const boardDetail = () => {
     const { boardDetail } = useSelector(state => state.board);
+    console.log(boardDetail);
     const { userInfo } = useSelector(state => state.user);
     const dispatch = useDispatch();
     const [ comment, onChangeComment ] = useInput("");
@@ -61,6 +62,19 @@ const boardDetail = () => {
                                 <Pre key={index}>{line}</Pre>
                             )
                         })}
+                        <div>
+                            {
+                                boardDetail.images && boardDetail.images.map(image => (
+                                    <div key={image._id} style={{ display: "inline-block" }}>
+                                        <img
+                                            src={image.src}
+                                            style={{ width: "200px" }}
+                                            alt={image.src}
+                                        />
+                                    </div>
+                                ))
+                            }
+                        </div>
                         <hr/>
                         {
                             boardDetail.comments.map((comments, index) => {
