@@ -21,7 +21,6 @@ const Pre = styled.pre`
 
 const boardDetail = () => {
     const { boardDetail } = useSelector(state => state.board);
-    console.log(boardDetail);
     const { userInfo } = useSelector(state => state.user);
     const dispatch = useDispatch();
     const [ comment, onChangeComment ] = useInput("");
