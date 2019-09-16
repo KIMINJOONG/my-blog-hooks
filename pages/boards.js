@@ -21,12 +21,26 @@ const BoardsList = styled.div`
         width: 80%;
         p {
             text-align: left;
+            @media screen and (max-width: 768px) {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                width: 100%;
+                font-size: 1.0rem;
+            }
         }
     }
     & .date {
         width: 20%;
         p {
             text-align: center;
+            @media screen and (max-width: 768px) {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                width: 50px;
+                font-size: 0.5rem;
+            }
         }
     }
 

@@ -1,7 +1,16 @@
+import styled from 'styled-components';
+
+const H1 = styled.h1`
+    @media screen and (max-width: 768px) {
+        font-size: 1rem;
+    }
+
+
+`;
 const Home = () => {
     return (
         <div>
-            <h1>BBOY KOHUBI'S 기술 블로그</h1>
+            <H1>BBOY KOHUBI'S 기술 블로그</H1>
             <h2>깃허브 주소</h2>
             <a href="https://github.com/kiminjoong" target="_blank">https://github.com/kiminjoong</a>
             <h3>사용 기술</h3>
