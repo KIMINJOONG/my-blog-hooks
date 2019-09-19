@@ -34,8 +34,10 @@ MyBlog.getInitialProps = async (context) => {
   let pageProps = {};
   const state = ctx.store.getState();
   const cookie = ctx.isServer ? ctx.req.headers.cookie : '';
-  axios.defaults.headers.Cookie = '';
-  axios.defaults.withCredentials = true;
+  //axios.defaults.headers.Cookie = '';
+  // Refused to set unsafe header "Cookie"
+  // 이 부분은 클라이언트 사이드에서 쿠키를 세팅하려했을 때 나는 에러입니다. 서버사이드에서만 세팅할 수 있게 해야합니다.
+  // 그래서 코드에서 if (option.isServer) { axios }로 감싸져 있습니다.
   if (ctx.isServer && cookie) {
     axios.defaults.headers.Cookie = cookie;
   }
