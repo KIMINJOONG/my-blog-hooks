@@ -89,7 +89,7 @@ function* watchLogout(){
 
 
 function userDetailAPI() {
-    return axios.get('/user/detail', {
+    return axios.get('/user/', {
         withCredentials: true
     });
 }
