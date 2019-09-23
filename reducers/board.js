@@ -6,6 +6,7 @@ export const initialState = {
     boardDetail: null,
     isUpload: false,
     isModify: false,
+    videoPath: ''
 };
 
 export const REMOVE_IMAGE = "REMOVE_IMAGE";

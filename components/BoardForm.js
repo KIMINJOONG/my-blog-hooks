@@ -13,7 +13,7 @@ const BoardForm = ({
     onChangeImages,
     onClickImageUpload,
     imagePaths,
-    onRemoveImage
+    onRemoveImage,
 }) => {
     return(
         <form onSubmit={onSubmitForm}>
@@ -22,6 +22,7 @@ const BoardForm = ({
                     <option value="-1">= 선택해주세요 =</option>
                     <option value="1">일상</option>
                     <option value="2">언어</option>
+                    <option value="3">비디오</option>
                 </select>
                 <TitleInput 
                     type="text"

@@ -23,6 +23,7 @@ const Board = () => {
         });
       }, []); // 실무에서는 이미지만 미리 먼저올려놓는 작업을 함
 
+    
     const onClickImageUpload = useCallback(() => {
         imageInput.current.click();
     },[imageInput]);
