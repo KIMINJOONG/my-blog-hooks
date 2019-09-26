@@ -3,7 +3,7 @@ import user from './user';
 import board from './board';
 import axios from 'axios';
 
-const baseURL = (process.env.NODE_ENV === "production" ? 'https://kohubi.me:4000' : 'http://localhost:4000');
+const baseURL = (process.env.NODE_ENV === "production" ? 'https://api.kohubi.me' : 'http://localhost:4000');
 // axios.defaults.baseURL = 'http://kohubi.me:4000';
 // axios.defaults.baseURL = process.env.DEV_SERVER;
 // axios.defaults.baseURL = 'http://localhost:4000';
