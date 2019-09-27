@@ -70,7 +70,6 @@ const reducer = (state = initialState, action) => {
                 break;
             }
             case USER_DETAIL_REQUEST: {
-                draft.userInfo = null;
                 break;
             }
             case USER_DETAIL_SUCCESS: {

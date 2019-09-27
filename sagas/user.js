@@ -89,7 +89,6 @@ function* watchLogout(){
 
 
 function userDetailAPI() {
-    console.log('user호출');
     return axios.get('/user/', {
         withCredentials: true
     });
@@ -98,7 +97,6 @@ function userDetailAPI() {
 function* userDetail() {
     try{
         const result = yield call(userDetailAPI);
-        console.log('result', result);
         yield put({
             type: USER_DETAIL_SUCCESS,
             data: result.data

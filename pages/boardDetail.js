@@ -126,7 +126,6 @@ const boardDetail = () => {
 }
 
 boardDetail.getInitialProps = async(context) => {
-    console.log('init');
     context.store.dispatch({
         type: USER_DETAIL_REQUEST,
     });
