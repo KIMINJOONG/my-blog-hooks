@@ -1,7 +1,7 @@
 import { useCallback, useRef, useEffect }from 'react';
 import { useInput } from '../util';
 import { useDispatch, useSelector } from 'react-redux';
-import { UPLOAD_BOARD_REQUEST, UPLOAD_IMAGES_REQUEST, REMOVE_IMAGE, REMOVE_IMAGE_REQUEST } from '../reducers/board';
+import { UPLOAD_BOARD_REQUEST, UPLOAD_IMAGES_REQUEST, REMOVE_IMAGE_REQUEST } from '../reducers/board';
 import BoardForm from '../components/BoardForm';
 import Router from "next/router";
 
@@ -9,6 +9,7 @@ const Board = () => {
     const [ title, onChangeTitle] = useInput('');
     const [ content, onChangeContent ] = useInput('');
     const [ category, onChangeCategory ] = useInput('');
+    const [ videoUrl, onChangeVideoUrl ] = useInput('');
     const { imagePaths, isUpload } = useSelector(state => state.board);
     const dispatch = useDispatch();
     const imageInput = useRef();
@@ -38,12 +39,13 @@ const Board = () => {
         formData.append('content', content);
         formData.append('title', title);
         formData.append('category', category);
+        formData.append('videoUrl', videoUrl);
         dispatch({
             type: UPLOAD_BOARD_REQUEST,
             data: formData
         });
         
-    }, [title, content, category]);
+    }, [title, content, category, videoUrl]);
 
     // 패턴
   // onRemoveImage(i) 처럼 괄호가 있으면 ()를 한번더 붙여주는게 패턴이다. 기억하기 고차함수라고 한다.
@@ -63,6 +65,7 @@ const Board = () => {
         });
 
     }, []);
+
 
     useEffect(() => {
         if(isUpload) {
@@ -85,6 +88,8 @@ const Board = () => {
                 onClickImageUpload={onClickImageUpload}
                 imagePaths={imagePaths}
                 onRemoveImage={onRemoveImage}
+                onChangeVideoUrl={onChangeVideoUrl}
+                videoUrl={videoUrl}
             />
             
         </div>

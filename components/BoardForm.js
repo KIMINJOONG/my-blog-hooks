@@ -1,4 +1,4 @@
-import { ContentTextArea,  TitleInput} from '../styled/common';
+import { ContentTextArea,  TextInput} from '../styled/common';
 import { useCallback } from 'react';
 const BoardForm = ({
     onChangeTitle,
@@ -14,6 +14,8 @@ const BoardForm = ({
     onClickImageUpload,
     imagePaths,
     onRemoveImage,
+    onChangeVideoUrl,
+    videoUrl
 }) => {
     return(
         <form onSubmit={onSubmitForm}>
@@ -24,13 +26,16 @@ const BoardForm = ({
                     <option value="2">언어</option>
                     <option value="3">비디오</option>
                 </select>
-                <TitleInput 
+                <TextInput 
                     type="text"
                     name="title"
                     value={title}
                     onChange={onChangeTitle}
                     placeholder="제목을 입력해주세요."
                 />
+            </div>
+            <div>
+                <TextInput type="text" onChange={onChangeVideoUrl} value={videoUrl} placeholder='유튜브 url을 등록해주세요.' />
             </div>
             <div>
                 <input type="file"  hidden ref={imageInput} onChange={onChangeImages} />

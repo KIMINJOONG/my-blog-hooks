@@ -54,7 +54,7 @@ export const ContentHeaderContainer = styled.div`
     }
 `;
 
-export const TitleInput = styled.input`
+export const TextInput = styled.input`
     width: 100%;
     margin-bottom: 10px;
 `;

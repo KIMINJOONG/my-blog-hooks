@@ -10,6 +10,7 @@ const boardUpdate = () => {
     const [ title, onChangeTitle ] = useInput(boardDetail.title);
     const [ content, onChangeContent ] = useInput(boardDetail.content);
     const [ category, onChangeCategory ] = useInput(boardDetail.category);
+    const [ videoUrl, onChangeVideoUrl ] = useInput(boardDetail.videoUrl);
     const { imagePaths } = useSelector(state => state.board);
     const dispatch = useDispatch();
     const onSubmitForm = useCallback(e => {
@@ -20,10 +21,11 @@ const boardUpdate = () => {
             data: {
                 boardId,
                 title,
-                content
+                content,
+                videoUrl
             }
         });
-    }, [title, content]);
+    }, [title, content, videoUrl]);
 
     const imageInput = useRef();
 
@@ -84,6 +86,8 @@ const boardUpdate = () => {
                 imagePaths={imagePaths}
                 onRemoveImage={onRemoveImage}
                 isUpdate={true}
+                onChangeVideoUrl={onChangeVideoUrl}
+                videoUrl={videoUrl}
             />
         </div>
     );
