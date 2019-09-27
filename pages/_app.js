@@ -31,7 +31,6 @@ const MyBlog = ({ Component, store, pageProps }) => {
 
 MyBlog.getInitialProps = async (context) => {
   const { ctx, Component } = context;
-  console.log('getInitial');
   let pageProps = {};
   const state = ctx.store.getState();
   const cookie = ctx.isServer ? ctx.req.headers.cookie : '';
@@ -42,7 +41,6 @@ MyBlog.getInitialProps = async (context) => {
   if (ctx.isServer && cookie) {
     axios.defaults.headers.Cookie = cookie;
   }
-  console.log(state.user.me);
   if (!state.user.me) {
     ctx.store.dispatch({
       type: USER_DETAIL_REQUEST,
