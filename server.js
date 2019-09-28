@@ -27,7 +27,7 @@ app.prepare().then(() => {
         secret: process.env.COOKIE_SECRET,
         cookie: {
             httpOnly: true,
-            secure: false,
+            secure: prod,
         },
     }));
     server.get('/board/:id', (req, res)=> {
@@ -36,7 +36,7 @@ app.prepare().then(() => {
 
     server.get('/board/:id/update', (req, res) => {
         return app.render(req, res, '/boardUpdate', { id: req.params.id });
-    })
+    });
     
     server.get('*', (req, res) => {
         return handle(req, res);
