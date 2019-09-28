@@ -27,7 +27,7 @@ app.prepare().then(() => {
         secret: '',
         cookie: {
             httpOnly: true,
-            secure: false,
+            secure: true,
         },
     }));
     server.get('/board/:id', (req, res)=> {

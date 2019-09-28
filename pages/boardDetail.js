@@ -79,7 +79,6 @@ const boardDetail = () => {
                             <div>
                                 <ReactPlayer 
                                     url={boardDetail.videoUrl}
-                                    payling
                                     controls
                                 />
                             </div>
