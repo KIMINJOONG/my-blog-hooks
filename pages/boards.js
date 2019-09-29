@@ -122,10 +122,13 @@ const boards = () => {
 // 서버쪽에서 페이지를 처음으로 불러올때 실행
 // 프론트에서 페이지를 넘낟즐때 프론트에서 실행
 boards.getInitialProps = async (context) => {
-    const { query : { searchValue } } = context;
+    const { query : { searchValue, category } } = context;
     context.store.dispatch({
       type: LOAD_BOARD_LIST_REQUEST,
-      data: searchValue
+      data: {
+          searchValue,
+          category
+      }
     });
 };
 
