@@ -45,7 +45,6 @@ const boardDetail = () => {
                     boardId
                 }
             });
-            alert('댓글이 등록되었습니다.');
         } else {
             alert('로그인이 필요합니다.');
         }

@@ -69,8 +69,8 @@ const Board = () => {
 
     useEffect(() => {
         if(isUpload) {
+            Router.push('/boards/1');
             alert('게시글이 등록되었습니다.');
-            Router.push('/boards');
         }
     })
     return (
