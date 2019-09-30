@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Router from 'next/router';
+import Router, {useRouter} from 'next/router';
 import { LOGOUT_REQUEST } from '../reducers/user';
 
 const Container = styled.div`
@@ -38,12 +38,16 @@ const Side = styled.aside`
         margin: 0px;
         padding: 0px;
     }
-    & li {
-        margin-top: 10px;
-        margin-left: 10px;
-        list-style: none;
-        cursor: pointer;
-    }
+`;
+
+const Item = styled.li`
+    margin-top: 10px;
+    margin-left: 10px;
+    list-style: none;
+    cursor: pointer;
+    border-bottom: 1px solid 
+        ${props => props.current ? "#3498db" : "transparent"};
+    transition: border-bottom .5s ease-in-out;
 `;
 
 const Content = styled.section`
@@ -83,9 +87,9 @@ const AppLayout = ({ children }) => {
             <Side>
                 <h3>category</h3>
                 <ul>
-                    <li onClick={() => Router.push('/boards/1')}>일상</li>
-                    <li onClick={() => Router.push('/boards/2')}>개발관련</li>
-                    <li onClick={() => Router.push('/boards/3')}>My Video</li>
+                    <Item current={useRouter().query.categoryId === '1'} onClick={() => Router.push('/boards/1')}>일상</Item>
+                    <Item current={useRouter().query.categoryId === '2'} onClick={() => Router.push('/boards/2')}>개발관련</Item>
+                    <Item current={useRouter().query.categoryId === '3'} onClick={() => Router.push('/boards/3')}>My Video</Item>
                 </ul>
             </Side>
             <Content>
