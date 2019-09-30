@@ -41,6 +41,7 @@ const Side = styled.aside`
 `;
 
 const Item = styled.li`
+    width: 60%;
     margin-top: 10px;
     margin-left: 10px;
     list-style: none;
