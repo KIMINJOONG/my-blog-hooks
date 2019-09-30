@@ -83,8 +83,9 @@ const AppLayout = ({ children }) => {
             <Side>
                 <h3>category</h3>
                 <ul>
-                    <li onClick={() => Router.push('/boards')}>Today I Learned</li>
-                    <li onClick={() => Router.push('/boards?category=3')}>My Video</li>
+                    <li onClick={() => Router.push('/boards/1')}>일상</li>
+                    <li onClick={() => Router.push('/boards/2')}>개발관련</li>
+                    <li onClick={() => Router.push('/boards/3')}>My Video</li>
                 </ul>
             </Side>
             <Content>

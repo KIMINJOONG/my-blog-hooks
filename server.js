@@ -30,6 +30,11 @@ app.prepare().then(() => {
             secure: prod,
         },
     }));
+
+    server.get('/boards/:categoryId', (req, res) => {
+        return app.render(req, res, '/boards', { categoryId: req.params.categoryId, searchValue: req.query.searchValue });
+    });
+
     server.get('/board/:id', (req, res)=> {
         return app.render(req, res, '/boardDetail', { id: req.params.id });
     });

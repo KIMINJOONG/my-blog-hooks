@@ -4,7 +4,7 @@ import board from './board';
 
 const rootReducer = combineReducers({
     user,
-    board
+    board,
 });
 
 export default rootReducer;

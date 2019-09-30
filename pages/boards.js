@@ -1,7 +1,7 @@
 import {  useSelector, dispatch } from 'react-redux'; 
 import { LOAD_BOARD_LIST_REQUEST } from '../reducers/board';
 import styled from 'styled-components';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import ContentHeader from '../components/ContentHeader';
 import { useCallback } from 'react';
 import { useInput } from '../util';
@@ -77,6 +77,8 @@ const SearchContainer = styled.div`
 
 
 const boards = () => {
+    const router = useRouter();
+    const { categoryId } = router.query;
     // const dispatch = useDispatch();
     const { boards } = useSelector(state => state.board);
     const [searchValue, onChangeSearchValue ] = useInput("");
@@ -89,7 +91,7 @@ const boards = () => {
 
     const onClickSearch = useCallback(e => {
         e.preventDefault();
-        Router.push(`/boards?searchValue=${searchValue}`);
+        Router.push(`/boards/${categoryId}?searchValue=${searchValue}`);
     }, [searchValue]);
 
     return (
@@ -122,12 +124,17 @@ const boards = () => {
 // 서버쪽에서 페이지를 처음으로 불러올때 실행
 // 프론트에서 페이지를 넘낟즐때 프론트에서 실행
 boards.getInitialProps = async (context) => {
-    const { query : { searchValue, category } } = context;
+    const { query : { searchValue } } = context;
+    const { 
+        req: {
+            params : { categoryId }
+        } 
+    } = context;
     context.store.dispatch({
       type: LOAD_BOARD_LIST_REQUEST,
       data: {
           searchValue,
-          category
+          categoryId
       }
     });
 };

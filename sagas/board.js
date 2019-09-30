@@ -1,10 +1,10 @@
 import { all, fork, takeLatest, put, call } from 'redux-saga/effects';
-import { LOAD_BOARD_LIST_REQUEST, LOAD_BOARD_LIST_SUCCESS, LOAD_BOARD_LIST_FAILURE, UPLOAD_BOARD_REQUEST, UPLOAD_BOARD_FAILURE, UPLOAD_BOARD_SUCCESS, LOAD_BOARD_DETAIL_REQUEST, LOAD_BOARD_DETAIL_SUCCESS, LOAD_BOARD_DETAIL_FAILURE, DELETE_BOARD_SUCCESS, DELETE_BOARD_FAILURE, DELETE_BOARD_REQUEST, MODIFY_BOARD_SUCCESS, MODIFY_BOARD_FAILURE, MODIFY_BOARD_REQUEST, ADD_COMMENT_REQUEST, ADD_COMMENT_FAILURE, ADD_COMMENT_SUCCESS, SEARCH_BOARD_LIST_SUCCESS, SEARCH_BOARD_LIST_FAILURE, SEARCH_BOARD_LIST_REQUEST, UPLOAD_IMAGES_SUCCESS, UPLOAD_IMAGES_FAILURE, UPLOAD_IMAGES_REQUEST, REMOVE_IMAGE_REQUEST, REMOVE_IMAGE_FAILURE, REMOVE_IMAGE_SUCCESS } from '../reducers/board';
+import { UPLOAD_BOARD_REQUEST, UPLOAD_BOARD_FAILURE, UPLOAD_BOARD_SUCCESS, LOAD_BOARD_DETAIL_REQUEST, LOAD_BOARD_DETAIL_SUCCESS, LOAD_BOARD_DETAIL_FAILURE, DELETE_BOARD_SUCCESS, DELETE_BOARD_FAILURE, DELETE_BOARD_REQUEST, MODIFY_BOARD_SUCCESS, MODIFY_BOARD_FAILURE, MODIFY_BOARD_REQUEST, ADD_COMMENT_REQUEST, ADD_COMMENT_FAILURE, ADD_COMMENT_SUCCESS, SEARCH_BOARD_LIST_SUCCESS, SEARCH_BOARD_LIST_FAILURE, SEARCH_BOARD_LIST_REQUEST, UPLOAD_IMAGES_SUCCESS, UPLOAD_IMAGES_FAILURE, UPLOAD_IMAGES_REQUEST, REMOVE_IMAGE_REQUEST, REMOVE_IMAGE_FAILURE, REMOVE_IMAGE_SUCCESS, LOAD_BOARD_LIST_SUCCESS, LOAD_BOARD_LIST_FAILURE, LOAD_BOARD_LIST_REQUEST } from '../reducers/board';
 import axios from 'axios';
 
-function loadBoardAPI(queryString) {
-    return axios.get(`boards?searchValue=${queryString.searchValue}&category=${queryString.category}`, {
-        withCredentials: true
+function loadBoardAPI(data) {
+    return axios.get(`boards/${data.categoryId}?searchValue=${encodeURI(data.searchValue)}`, {
+        withCredentials: true,
     });
 }
 
@@ -58,7 +58,7 @@ function* watchUploadBoard() {
 
 
 function modifyBoardAPI(modifyBoardData) {
-    return axios.put(`/boards/${modifyBoardData.boardId}`, modifyBoardData, {
+    return axios.put(`/board/${modifyBoardData.boardId}`, modifyBoardData, {
         withCredentials: true
     });
 }
@@ -87,7 +87,7 @@ function* watchModifyBoard() {
 
 
 function loadBoardDetailAPI(boardId) {
-    return axios.get(`/boards/${boardId}`);
+    return axios.get(`/board/${boardId}`);
 }
 
 function* loadBoardDetail(action) {
@@ -112,7 +112,7 @@ function* watchLoadBoardDetail() {
 }
 
 function deleteBoardAPI(boardId) {
-    return axios.delete(`/boards/${boardId}`, {
+    return axios.delete(`/board/${boardId}`, {
         withCredentials: true
     });
 }
@@ -141,7 +141,7 @@ function* watchDeleteBoard() {
 
 
 function addCommentAPI(commentData) {
-    return axios.post(`/boards/${commentData.boardId}/comment`, commentData, {
+    return axios.post(`/board/${commentData.boardId}/comment`, commentData, {
         withCredentials: true
     });
 }
@@ -169,7 +169,7 @@ function* watchAddComment() {
 
 
 function uploadImagesAPI(formData) {
-    return axios.post('/boards/images', formData, {
+    return axios.post('/board/images', formData, {
       withCredentials: true
     });
   }
@@ -195,7 +195,7 @@ function uploadImagesAPI(formData) {
 
 
 function removeImageAPI(data) {
-    return axios.delete(`/boards/image/${data.fileName}`,{
+    return axios.delete(`/board/image/${data.fileName}`,{
         withCredentials: true
     });
 }
