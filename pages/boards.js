@@ -96,7 +96,7 @@ const boards = () => {
 
     return (
         <div>
-            <ContentHeader bigTitle={"Today I Learned"} />
+            <ContentHeader bigTitle={(categoryId === '1' ? '일상' : categoryId === '2' ? '개발 관련' : 'My Video')} />
             <ContentContainer>
                 {boards && boards.map(board => (
                     <BoardsList key={board._id} onClick={() => Router.push(`/board/${board._id}`)}>
