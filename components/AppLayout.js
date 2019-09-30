@@ -49,6 +49,9 @@ const Item = styled.li`
     border-bottom: 1px solid 
         ${props => props.current ? "#3498db" : "transparent"};
     transition: border-bottom .5s ease-in-out;
+    :hover {
+        border-bottom: 1px solid #3498db;
+    }
 `;
 
 const Content = styled.section`
