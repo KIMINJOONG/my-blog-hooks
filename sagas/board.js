@@ -3,7 +3,7 @@ import { UPLOAD_BOARD_REQUEST, UPLOAD_BOARD_FAILURE, UPLOAD_BOARD_SUCCESS, LOAD_
 import axios from 'axios';
 
 function loadBoardAPI(data) {
-    return axios.get(`boards/${data.categoryId}?searchValue=${encodeURI(data.searchValue)}`, {
+    return axios.get(`boards/${data.categoryId}?searchValue=${encodeURI(data.searchValue)}&page=${data.page}&pageNum=${data.pageNum}`, {
         withCredentials: true,
     });
 }

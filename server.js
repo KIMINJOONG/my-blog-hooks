@@ -32,7 +32,7 @@ app.prepare().then(() => {
     }));
 
     server.get('/boards/:categoryId', (req, res) => {
-        return app.render(req, res, '/boards', { categoryId: req.params.categoryId, searchValue: req.query.searchValue });
+        return app.render(req, res, '/boards', { categoryId: req.params.categoryId, searchValue: req.query.searchValue, page: req.query.page, pageNum: req.query.pageNum });
     });
 
     server.get('/board/:id', (req, res)=> {

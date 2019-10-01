@@ -91,7 +91,7 @@ const boards = () => {
 
     const onClickSearch = useCallback(e => {
         e.preventDefault();
-        Router.push(`/boards/${categoryId}?searchValue=${searchValue}`);
+        Router.push(`/boards/${categoryId}?searchValue=${searchValue}&page=1&pageNum=10`);
     }, [searchValue]);
 
     return (
@@ -124,8 +124,9 @@ const boards = () => {
 // 서버쪽에서 페이지를 처음으로 불러올때 실행
 // 프론트에서 페이지를 넘낟즐때 프론트에서 실행
 boards.getInitialProps = async (context) => {
-    const { query : { searchValue } } = context;
-    const { 
+    const { query : { searchValue, page, pageNum } } = context;
+    console.log(searchValue, page, pageNum);
+    const {
         req: {
             params : { categoryId }
         } 
@@ -134,7 +135,9 @@ boards.getInitialProps = async (context) => {
       type: LOAD_BOARD_LIST_REQUEST,
       data: {
           searchValue,
-          categoryId
+          categoryId,
+          page,
+          pageNum
       }
     });
 };
