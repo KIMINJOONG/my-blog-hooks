@@ -6,7 +6,7 @@ import ContentHeader from '../components/ContentHeader';
 import { useCallback } from 'react';
 import { useInput } from '../util';
 import SearchForm from '../components/SearchForm';
-import { Pagination } from 'antd';
+import { Pagination, Row, Col } from 'antd';
 
 const BoardsList = styled.div`
     width: 100%;
@@ -95,7 +95,6 @@ const boards = () => {
     }, [searchValue]);
 
     const onChangePage = useCallback((page) => {
-       console.log(page); 
        dispatch({
             type: LOAD_BOARD_LIST_REQUEST,
             data: {
@@ -108,27 +107,32 @@ const boards = () => {
     },[categoryId, searchValue]);
     return (
         <div>
-            <ContentHeader bigTitle={(categoryId === '1' ? '일상' : categoryId === '2' ? '개발 관련' : 'My Video')} />
-            <ContentContainer>
-                {boards && boards.map(board => (
-                    <BoardsList key={board._id} onClick={() => Router.push(`/board/${board._id}`)}>
-                        <div className="title">
-                            <p>{board.title}</p>
-                        </div>
-                        <div className="date">
-                            <p>{board.createdAt.length < 10 ? board.createdAt : board.createdAt.substring(0, 10)}</p>
-                        </div>
-                    </BoardsList>
-                ))}
-            </ContentContainer>
-            
-            <SearchContainer>
-                <SearchForm searchValue={searchValue} onChangeSearchValue={onChangeSearchValue} onClickSearch={onClickSearch} />
-            </SearchContainer>
-
-            <Pagination onChange={onChangePage} defaultCurrent={1} total={50} />
-            
+            <div style={{height: '660px'}}>
+                <ContentHeader bigTitle={(categoryId === '1' ? '일상' : categoryId === '2' ? '개발 관련' : 'My Video')} />
+                <Row>
+                    {boards && boards.map(board => (
+                        <BoardsList key={board._id} onClick={() => Router.push(`/board/${board._id}`)}>
+                            <div className="title">
+                                <p>{board.title}</p>
+                            </div>
+                            <div className="date">
+                                <p>{board.createdAt.length < 10 ? board.createdAt : board.createdAt.substring(0, 10)}</p>
+                            </div>
+                        </BoardsList>
+                    ))}
+                </Row>
+            </div>
+            <Row>
+                    <SearchForm searchValue={searchValue} onChangeSearchValue={onChangeSearchValue} onClickSearch={onClickSearch} />
+                </Row>
+                <Row>
+                    <Col md={24} style={{textAlign: 'center'}}>
+                        <Pagination onChange={onChangePage} defaultCurrent={1} total={50} />
+                    </Col>
+                    
+                </Row>
         </div>
+        
     )
 }
 
@@ -138,7 +142,7 @@ const boards = () => {
 // 서버쪽에서 페이지를 처음으로 불러올때 실행
 // 프론트에서 페이지를 넘낟즐때 프론트에서 실행
 boards.getInitialProps = async (context) => {
-    const { query : { searchValue, page, pageNum } } = context;
+    const { query : { searchValue } } = context;
     const {
         req: {
             params : { categoryId }
@@ -149,8 +153,8 @@ boards.getInitialProps = async (context) => {
       data: {
           searchValue,
           categoryId,
-          page,
-          pageNum
+          page: 1,
+          pageNum: 10
       }
     });
 };

@@ -4,31 +4,33 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Router, {useRouter} from 'next/router';
 import { LOGOUT_REQUEST } from '../reducers/user';
-import DatePicker  from 'antd/lib/date-picker';
+import { Layout, Menu, Breadcrumb, Icon, Row, Col, Button } from 'antd';
+
+const { Header, Footer, Sider, Content } = Layout;
 
 const Container = styled.div`
     width: 80%;
     height: auto;
     margin: 0 auto;
 `;
-const Header = styled.header`
-    width: 100%;
-    height: 90px;
-    cursor: pointer;
-     & .myHome {
-         line-height: 46px;
-         font-size: 1.3rem;
-         text-align: center;
-         color: #707070;
-         margin: 0px;
-     }
+// const Header = styled.header`
+//     width: 100%;
+//     height: 90px;
+//     cursor: pointer;
+//      & .myHome {
+//          line-height: 46px;
+//          font-size: 1.3rem;
+//          text-align: center;
+//          color: #707070;
+//          margin: 0px;
+//      }
 
-     & > div > div {
-         text-align: right;
-         color: #707070;
-         cursor: pointer;
-     }
-`;
+//      & > div > div {
+//          text-align: right;
+//          color: #707070;
+//          cursor: pointer;
+//      }
+// `;
 
 const Side = styled.aside`
     float: left;
@@ -55,11 +57,11 @@ const Item = styled.li`
     }
 `;
 
-const Content = styled.section`
-    float: right;
-    width: 80%;
-    height: 600px;
-`;
+// const Content = styled.section`
+//     float: right;
+//     width: 80%;
+//     height: 600px;
+// `;
 
 const AppLayout = ({ children }) => {
     const dispatch = useDispatch();
@@ -70,40 +72,76 @@ const AppLayout = ({ children }) => {
     }, []);
     const { userInfo } = useSelector(state => state.user);
     return (
-        <>
-        <Container>
-            <Header>
-                <div>
-                    <p className="myHome" onClick={() => Router.push('/')}>KOHUBI'S BLOG</p>
-                    {
-                        userInfo ? (
-                            <div onClick={ onLogout }>
-                                <span>로그아웃</span>
-                            </div>
-                        ) : (
-                            
-                            <div onClick={ () => Router.push('/login') }>
-                                <span>로그인</span>
-                            </div>
-                        )
-                    }
-                    
-                </div>
+        <Layout style={{height: '800px'}}>
+            <Header style={{background:'white'}}>
+                <Row>
+                    <Col xs={23} md={23} onClick={() => Router.push('/')}>
+                        KOHUBI'S BLOG
+                    </Col>
+                    <Col xs={1} md={1}>
+                        {
+                            userInfo ? (
+                                <div onClick={ onLogout }>
+                                    <span>로그아웃</span>
+                                </div>
+                            ) : (
+                                
+                                <Button type="primary" onClick={ () => Router.push('/login') }>
+                                    로그인
+                                </Button>
+                            )
+                        }
+                    </Col>
+                </Row>
             </Header>
-            <Side>
-                <h3>category</h3>
-                <ul>
-                    <Item current={useRouter().query.categoryId === '1'} onClick={() => Router.push('/boards/1')}>일상</Item>
-                    <Item current={useRouter().query.categoryId === '2'} onClick={() => Router.push('/boards/2')}>개발관련</Item>
-                    <Item current={useRouter().query.categoryId === '3'} onClick={() => Router.push('/boards/3')}>My Video</Item>
-                </ul>
-            </Side>
-            <Content>
-                {children}
-            </Content>
+            <Layout>
+                <Row style={{background:'white', height: '800px'}}>
+                    <Col xs={24} md={2}>
+                        <Item current={useRouter().query.categoryId === '1'} onClick={() => Router.push('/boards/1')}>일상</Item>
+                        <Item current={useRouter().query.categoryId === '2'} onClick={() => Router.push('/boards/2')}>개발관련</Item>
+                        <Item current={useRouter().query.categoryId === '3'} onClick={() => Router.push('/boards/3')}>My Video</Item>
+                    </Col>
+                    <Col xs={24} md={22}>
+                        <Content>{children}</Content>
+                    </Col>
+                </Row>
+                
+            </Layout>
+        </Layout>
+        // <>
+        // <Container>
+        //     <Header>
+        //         <div>
+        //             <p className="myHome" onClick={() => Router.push('/')}>KOHUBI'S BLOG</p>
+        //             {
+        //                 userInfo ? (
+        //                     <div onClick={ onLogout }>
+        //                         <span>로그아웃</span>
+        //                     </div>
+        //                 ) : (
+                            
+        //                     <div onClick={ () => Router.push('/login') }>
+        //                         <span>로그인</span>
+        //                     </div>
+        //                 )
+        //             }
+                    
+        //         </div>
+        //     </Header>
+        //     <Side>
+        //         <h3>category</h3>
+        //         <ul>
+        //             <Item current={useRouter().query.categoryId === '1'} onClick={() => Router.push('/boards/1')}>일상</Item>
+        //             <Item current={useRouter().query.categoryId === '2'} onClick={() => Router.push('/boards/2')}>개발관련</Item>
+        //             <Item current={useRouter().query.categoryId === '3'} onClick={() => Router.push('/boards/3')}>My Video</Item>
+        //         </ul>
+        //     </Side>
+        //     <Content>
+        //         {children}
+        //     </Content>
             
-        </Container>
-        </>
+        // </Container>
+        // </>
     )
 };
 
