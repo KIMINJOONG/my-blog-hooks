@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Router, {useRouter} from 'next/router';
 import { LOGOUT_REQUEST } from '../reducers/user';
+import DatePicker  from 'antd/lib/date-picker';
 
 const Container = styled.div`
     width: 80%;
@@ -69,6 +70,7 @@ const AppLayout = ({ children }) => {
     }, []);
     const { userInfo } = useSelector(state => state.user);
     return (
+        <>
         <Container>
             <Header>
                 <div>
@@ -101,6 +103,7 @@ const AppLayout = ({ children }) => {
             </Content>
             
         </Container>
+        </>
     )
 };
 

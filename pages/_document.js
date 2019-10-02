@@ -5,9 +5,7 @@ import { ServerStyleSheet } from 'styled-components';
 export default class MyBlog extends Document {
     static getInitialProps(context) {
       const sheet = new ServerStyleSheet();
-      const page = context.renderPage((App) => (props) =>
-        sheet.collectStyles(<App {...props} />),
-      );
+      const page = context.renderPage((App) => (props) => sheet.collectStyles(<App { ...props }/>));
       const styleTags = sheet.getStyleElement();
       return { ...page, styleTags };
     }

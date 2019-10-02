@@ -1,17 +1,16 @@
+import { Input } from 'antd';
 const SearchForm = ({ searchValue, onChangeSearchValue, onClickSearch}) => {
     return(
         <div>
             <form onSubmit={onClickSearch}>
-                <input 
-                    type="text" 
+                <Input.Search
                     placeholder={"검색어를 입력해주세요."} 
                     value={searchValue} 
                     onChange={onChangeSearchValue}
-                    
+                    enterButton="Search"
+                    size="default"
+                    onSearch={onClickSearch}
                 />
-                <button onClick={onClickSearch} >
-                    검색
-                </button>
             </form>
             
         </div>

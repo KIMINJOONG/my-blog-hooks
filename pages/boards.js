@@ -1,4 +1,4 @@
-import {  useSelector, dispatch } from 'react-redux'; 
+import {  useSelector, useDispatch } from 'react-redux'; 
 import { LOAD_BOARD_LIST_REQUEST } from '../reducers/board';
 import styled from 'styled-components';
 import Router, { useRouter } from 'next/router';
@@ -6,6 +6,7 @@ import ContentHeader from '../components/ContentHeader';
 import { useCallback } from 'react';
 import { useInput } from '../util';
 import SearchForm from '../components/SearchForm';
+import { Pagination } from 'antd';
 
 const BoardsList = styled.div`
     width: 100%;
@@ -79,7 +80,7 @@ const SearchContainer = styled.div`
 const boards = () => {
     const router = useRouter();
     const { categoryId } = router.query;
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     const { boards } = useSelector(state => state.board);
     const [searchValue, onChangeSearchValue ] = useInput("");
     // useEffect(() => {
@@ -89,11 +90,22 @@ const boards = () => {
     //     });
     // }, []);
 
-    const onClickSearch = useCallback(e => {
-        e.preventDefault();
-        Router.push(`/boards/${categoryId}?searchValue=${searchValue}&page=1&pageNum=10`);
+    const onClickSearch = useCallback(value => {
+        Router.push(`/boards/${categoryId}?searchValue=${value}&page=1&pageNum=10`);
     }, [searchValue]);
 
+    const onChangePage = useCallback((page) => {
+       console.log(page); 
+       dispatch({
+            type: LOAD_BOARD_LIST_REQUEST,
+            data: {
+                searchValue,
+                categoryId,
+                page,
+                pageNum: 10
+            }
+       });
+    },[categoryId, searchValue]);
     return (
         <div>
             <ContentHeader bigTitle={(categoryId === '1' ? '일상' : categoryId === '2' ? '개발 관련' : 'My Video')} />
@@ -113,6 +125,8 @@ const boards = () => {
             <SearchContainer>
                 <SearchForm searchValue={searchValue} onChangeSearchValue={onChangeSearchValue} onClickSearch={onClickSearch} />
             </SearchContainer>
+
+            <Pagination onChange={onChangePage} defaultCurrent={1} total={50} />
             
         </div>
     )
@@ -125,7 +139,6 @@ const boards = () => {
 // 프론트에서 페이지를 넘낟즐때 프론트에서 실행
 boards.getInitialProps = async (context) => {
     const { query : { searchValue, page, pageNum } } = context;
-    console.log(searchValue, page, pageNum);
     const {
         req: {
             params : { categoryId }
