@@ -81,12 +81,12 @@ const AppLayout = ({ children }) => {
                     <Col xs={1} md={1}>
                         {
                             userInfo ? (
-                                <div onClick={ onLogout }>
-                                    <span>로그아웃</span>
-                                </div>
+                                <Button onClick={ onLogout }>
+                                    로그아웃
+                                </Button>
                             ) : (
                                 
-                                <Button type="primary" onClick={ () => Router.push('/login') }>
+                                <Button onClick={ () => Router.push('/login') }>
                                     로그인
                                 </Button>
                             )
@@ -95,14 +95,14 @@ const AppLayout = ({ children }) => {
                 </Row>
             </Header>
             <Layout>
-                <Row style={{background:'white', height: '800px'}}>
-                    <Col xs={24} md={2}>
+                <Row style={{background: 'white'}}>
+                    <Col xs={24} md={2} style={{height: 120, borderBottom: '1px solid gray'}}>
                         <Item current={useRouter().query.categoryId === '1'} onClick={() => Router.push('/boards/1')}>일상</Item>
                         <Item current={useRouter().query.categoryId === '2'} onClick={() => Router.push('/boards/2')}>개발관련</Item>
                         <Item current={useRouter().query.categoryId === '3'} onClick={() => Router.push('/boards/3')}>My Video</Item>
                     </Col>
-                    <Col xs={24} md={20}>
-                        <Content>{children}</Content>
+                    <Col xs={24} md={20} style={{background:'white', height: '800px'}}>
+                        <Content style={{padding: 15}}>{children}</Content>
                     </Col>
                 </Row>
                 

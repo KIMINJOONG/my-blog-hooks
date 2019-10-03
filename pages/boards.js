@@ -123,7 +123,9 @@ const boards = () => {
                 </Row>
             </div>
             <Row>
+                <Col>
                     <SearchForm searchValue={searchValue} onChangeSearchValue={onChangeSearchValue} onClickSearch={onClickSearch} />
+                </Col>
             </Row>
             <Row style={{marginTop: 10}}>
                 <Col md={24} style={{textAlign: 'center'}}>
