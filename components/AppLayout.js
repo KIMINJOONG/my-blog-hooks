@@ -101,7 +101,7 @@ const AppLayout = ({ children }) => {
                         <Item current={useRouter().query.categoryId === '2'} onClick={() => Router.push('/boards/2')}>개발관련</Item>
                         <Item current={useRouter().query.categoryId === '3'} onClick={() => Router.push('/boards/3')}>My Video</Item>
                     </Col>
-                    <Col xs={24} md={22}>
+                    <Col xs={24} md={20}>
                         <Content>{children}</Content>
                     </Col>
                 </Row>

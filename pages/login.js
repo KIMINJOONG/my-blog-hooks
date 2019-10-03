@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LOGIN_REUQEST } from '../reducers/user';
 import Router from "next/router";
 import Link from 'next/link';
+import { message } from 'antd';
 
 const Login = () => {
     const [id, onChangeId ] = useInput("");
@@ -24,7 +25,8 @@ const Login = () => {
 
     useEffect(() => {
         if (userInfo) {
-        Router.push("/");
+            message.success('로그인 되었습니다.');
+            Router.push("/");
         }
     }, [userInfo]);
 

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { UPLOAD_BOARD_REQUEST, UPLOAD_IMAGES_REQUEST, REMOVE_IMAGE_REQUEST } from '../reducers/board';
 import BoardForm from '../components/BoardForm';
 import Router from "next/router";
+import { message } from 'antd';
 
 const Board = () => {
     const [ title, onChangeTitle] = useInput('');
@@ -13,6 +14,8 @@ const Board = () => {
     const { imagePaths, isUpload } = useSelector(state => state.board);
     const dispatch = useDispatch();
     const imageInput = useRef();
+
+
     const onChangeImages = useCallback(e => {
         const imageFormData = new FormData();
         [].forEach.call(e.target.files, (f) => {
@@ -70,7 +73,7 @@ const Board = () => {
     useEffect(() => {
         if(isUpload) {
             Router.push('/boards/1');
-            alert('게시글이 등록되었습니다.');
+            message.success('게시글이 등록되었습니다.');
         }
     })
     return (

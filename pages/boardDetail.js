@@ -6,6 +6,7 @@ import Router from 'next/router';
 import { USER_DETAIL_REQUEST } from '../reducers/user';
 import { useInput } from '../util';
 import ReactPlayer from 'react-player';
+import { message, Button } from 'antd';
 
 const ButtonContainer = styled.div`
 
@@ -31,7 +32,7 @@ const boardDetail = () => {
           type: DELETE_BOARD_REQUEST,
           data: boardId
         });
-        alert('삭제되었습니다.');
+        message.success('삭제되었습니다.');
         Router.push('/boards');
       });
 
@@ -46,7 +47,7 @@ const boardDetail = () => {
                 }
             });
         } else {
-            alert('로그인이 필요합니다.');
+            message.error('로그인이 필요합니다.');
         }
     }, [comment, userInfo]);
 
@@ -105,14 +106,14 @@ const boardDetail = () => {
                                 
                             </div>
                             <div>
-                                <button onClick={postComment}>등록</button>
+                                <Button type="primary" onClick={postComment}>등록</Button>
                             </div>
                         </div>
 
                         { userInfo && userInfo.id === 'master' && (
                             <ButtonContainer>
-                                <button onClick={() => Router.push(`/board/${boardDetail._id}/update`)}>수정</button>
-                                <button onClick={onDeleteBoard(boardDetail._id)}>삭제</button>
+                                <Button type="primary" onClick={() => Router.push(`/board/${boardDetail._id}/update`)}>수정</Button>
+                                <Button type="danger" onClick={onDeleteBoard(boardDetail._id)}>삭제</Button>
                             </ButtonContainer>
                         )}
                     </div>
