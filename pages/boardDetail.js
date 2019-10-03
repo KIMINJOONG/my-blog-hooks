@@ -6,7 +6,7 @@ import Router from 'next/router';
 import { USER_DETAIL_REQUEST } from '../reducers/user';
 import { useInput } from '../util';
 import ReactPlayer from 'react-player';
-import { message, Button, Typography } from 'antd';
+import { message, Button, Typography, Row, Col } from 'antd';
 
 const ButtonContainer = styled.div`
 
@@ -78,12 +78,14 @@ const boardDetail = () => {
                             }
                         </div>
                         {  boardDetail.videoUrl && (
-                            <div>
-                                <ReactPlayer 
-                                    url={boardDetail.videoUrl}
-                                    controls
-                                />
-                            </div>
+                            <Row>
+                                <Col>
+                                    <ReactPlayer 
+                                        url={boardDetail.videoUrl}
+                                        controls
+                                    />
+                                </Col>
+                            </Row>
                         )}
                         <hr/>
                         {
