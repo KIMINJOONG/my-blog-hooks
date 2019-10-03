@@ -57,11 +57,13 @@ const boardDetail = () => {
                 boardDetail && (
                     <div>
                         <Typography.Title>{boardDetail.title}</Typography.Title>
+                        <Typography.Text underline>
                         {boardDetail.content && boardDetail.content.length > 0 && boardDetail.content.split('\n').map((line, index) => {
-                            return (
-                                <Typography.Text code key={index}>{line}</Typography.Text>
+                            return(
+                                <span>{line}<br/></span>
                             )
                         })}
+                        </Typography.Text>
                         <div>
                             {
                                 boardDetail.images && boardDetail.images.map(image => (
