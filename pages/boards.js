@@ -125,7 +125,7 @@ const boards = () => {
             <Row>
                     <SearchForm searchValue={searchValue} onChangeSearchValue={onChangeSearchValue} onClickSearch={onClickSearch} />
             </Row>
-            <Row>
+            <Row style={{marginTop: 10}}>
                 <Col md={24} style={{textAlign: 'center'}}>
                     <Pagination onChange={onChangePage} defaultCurrent={1} total={totalCount} />
                 </Col>
