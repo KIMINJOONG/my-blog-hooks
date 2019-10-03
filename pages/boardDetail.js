@@ -57,7 +57,7 @@ const boardDetail = () => {
                 boardDetail && (
                     <div>
                         <Typography.Title>{boardDetail.title}</Typography.Title>
-                        <Typography.Text underline>
+                        <Typography.Text>
                         {boardDetail.content && boardDetail.content.length > 0 && boardDetail.content.split('\n').map((line, index) => {
                             return(
                                 <span key={index}>{line}<br/></span>
