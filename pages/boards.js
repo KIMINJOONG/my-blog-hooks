@@ -81,7 +81,7 @@ const boards = () => {
     const router = useRouter();
     const { categoryId } = router.query;
     const dispatch = useDispatch();
-    const { boards } = useSelector(state => state.board);
+    const { boards, totalCount } = useSelector(state => state.board);
     const [searchValue, onChangeSearchValue ] = useInput("");
     // useEffect(() => {
     //     dispatch({
@@ -127,7 +127,7 @@ const boards = () => {
                 </Row>
                 <Row>
                     <Col md={24} style={{textAlign: 'center'}}>
-                        <Pagination onChange={onChangePage} defaultCurrent={1} total={50} />
+                        <Pagination onChange={onChangePage} defaultCurrent={1} total={totalCount} />
                     </Col>
                     
                 </Row>

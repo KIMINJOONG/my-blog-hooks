@@ -2,11 +2,12 @@ import produce from 'immer';
 
 export const initialState = {
     boards: [], // 게시글 리스트
+    totalCount: 0,
     imagePaths: [], // 미리보기 이미지 경로
     boardDetail: null,
     isUpload: false,
     isModify: false,
-    videoPath: ''
+    videoPath: '',
 };
 
 export const REMOVE_IMAGE = "REMOVE_IMAGE";
@@ -92,7 +93,8 @@ const reducer = (state = initialState, action) => {
                 break;
             }
             case LOAD_BOARD_LIST_SUCCESS: {
-                draft.boards = action.data;
+                draft.boards = action.data.boards;
+                draft.totalCount = action.data.totalCount;
                 break;
             }
             case LOAD_BOARD_LIST_FAILURE: {
