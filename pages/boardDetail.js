@@ -6,7 +6,7 @@ import Router from 'next/router';
 import { USER_DETAIL_REQUEST } from '../reducers/user';
 import { useInput } from '../util';
 import ReactPlayer from 'react-player';
-import { message, Button } from 'antd';
+import { message, Button, Typography } from 'antd';
 
 const ButtonContainer = styled.div`
 
@@ -56,10 +56,10 @@ const boardDetail = () => {
             {
                 boardDetail && (
                     <div>
-                        <h1>{boardDetail.title}</h1>
+                        <Typography.Title>{boardDetail.title}</Typography.Title>
                         {boardDetail.content && boardDetail.content.length > 0 && boardDetail.content.split('\n').map((line, index) => {
                             return (
-                                <Pre key={index}>{line}</Pre>
+                                <Typography.Text code key={index}>{line}</Typography.Text>
                             )
                         })}
                         <div>
