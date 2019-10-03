@@ -60,7 +60,7 @@ const boardDetail = () => {
                         <Typography.Text underline>
                         {boardDetail.content && boardDetail.content.length > 0 && boardDetail.content.split('\n').map((line, index) => {
                             return(
-                                <span>{line}<br/></span>
+                                <span key={index}>{line}<br/></span>
                             )
                         })}
                         </Typography.Text>
