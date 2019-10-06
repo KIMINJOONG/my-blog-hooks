@@ -13,6 +13,8 @@ const Login = () => {
     const dispatch = useDispatch();
     const { userInfo } = useSelector(state => state.user);
 
+    
+
     const onSubmitForm = useCallback(e => {
         e.preventDefault();
         dispatch({
@@ -23,6 +25,12 @@ const Login = () => {
             }
         });
     }, [id, password]);
+
+    const onKeyPress = (e) => {
+        if(e.key === 'Enter') {
+            onSubmitForm(e);
+        }
+    }
 
     useEffect(() => {
         if (userInfo) {
@@ -54,6 +62,7 @@ const Login = () => {
                                 <Input.Password 
                                     placeholder="비밀번호를 입력해주세요."
                                     onChange={onChangePassword} 
+                                    onKeyPress={onKeyPress}
                                 />
                             </Col>
                         </Row>

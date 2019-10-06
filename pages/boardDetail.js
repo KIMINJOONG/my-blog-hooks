@@ -6,6 +6,7 @@ import Router from 'next/router';
 import { USER_DETAIL_REQUEST } from '../reducers/user';
 import { useInput } from '../util';
 import ReactPlayer from 'react-player';
+import InstagramEmbed from 'react-instagram-embed';
 import { message, Button, Typography, Row, Col } from 'antd';
 
 const ButtonContainer = styled.div`
@@ -85,8 +86,27 @@ const boardDetail = () => {
                                         controls
                                     />
                                 </Col>
+                                
                             </Row>
                         )}
+                        {
+                            boardDetail.instaUrl && (
+                                <Row>
+                                    <InstagramEmbed
+                                        url='https://www.instagram.com/p/B3O9tAFptbx/?hl=ko'
+                                        maxWidth={320}
+                                        hideCaption={false}
+                                        containerTagName='div'
+                                        protocol=''
+                                        injectScript
+                                        onLoading={() => {}}
+                                        onSuccess={() => {}}
+                                        onAfterRender={() => {}}
+                                        onFailure={() => {}}
+                                    />
+                                </Row>
+                            )
+                        }
                         <hr/>
                         {
                             boardDetail.comments.map((comments, index) => {
