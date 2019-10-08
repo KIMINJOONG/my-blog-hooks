@@ -4,6 +4,7 @@ import { useInput } from '../util';
 import { LOAD_BOARD_DETAIL_REQUEST, MODIFY_BOARD_REQUEST } from '../reducers/board';
 import { useCallback, useEffect, useRef } from 'react';
 import Router from 'next/router';
+import { message } from 'antd';
 
 const boardUpdate = () => {
     const { boardDetail, isModify } = useSelector(state => state.board);
@@ -22,10 +23,11 @@ const boardUpdate = () => {
                 boardId,
                 title,
                 content,
-                videoUrl
+                videoUrl,
+                category
             }
         });
-    }, [title, content, videoUrl]);
+    }, [title, content, videoUrl, category]);
 
     const imageInput = useRef();
 
@@ -65,8 +67,7 @@ const boardUpdate = () => {
 
     useEffect(() => {
         if(isModify) {
-            alert('수정되었습니다.');
-            Router.push('/boards');
+            message.success('게시글이 수정되었습니다.');
         }
     });
     
