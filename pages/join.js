@@ -3,6 +3,8 @@ import { joinUserAction } from '../reducers/user';
 import { useDispatch, useSelector } from 'react-redux';
 import Router from "next/router";
 import {useInput} from '../util';
+import { message } from 'antd';
+import JoinForm from '../components/JoinForm';
 
 const Join = () => {
     const [passwordCheck, setPasswordCheck] = useState("");
@@ -17,10 +19,6 @@ const Join = () => {
         if (userInfo) {
             alert("이미 로그인된 유저입니다.");
             Router.push("/");
-        }
-        if (isJoin) {
-        alert("회원가입이 완료되었으니 로그인해주시기 바랍니다.");
-        Router.push("/login");
         }
     }, [isJoin]);
 
@@ -39,6 +37,8 @@ const Join = () => {
                 password,
             }),
         );
+        message.success('회원가입이 완료되었습니다.');
+        Router.push("/");
     },[password, passwordCheck]
     );
 
@@ -54,42 +54,15 @@ const Join = () => {
 
     return (
         <>
-            <form onSubmit={onSubmit}>
-                <div>
-                    <span>아이디 : </span>
-                    <input 
-                        type="text" 
-                        value={id} 
-                        name="userId" 
-                        placeholder="아이디를 입력해주세요." 
-                        onChange={onChangeId}
-                    />
-                </div>
-                <div>
-                    <span>비밀번호 : </span>
-                    <input 
-                        type="password" 
-                        value={password} 
-                        name="userPassword" 
-                        onChange={onChangePassword}
-                        placeholder="패스워드를 입력해주세요." />
-                </div>
-                <div>
-                    <span>비밀번호 확인 : </span>
-                    <input 
-                        type="password" 
-                        name="userPassword2"
-                        onChange={onChangePasswordCheck} 
-                        placeholder="패스워드를 다시입력해주세요" />
-                </div>
-                {passwordError && (
-                    <div style={{ color: "red"}}>비밀번호가 일치하지 않습니다.</div>
-                )}
-                <div>
-                    <button>회원가입</button>
-                    <button>취소</button>
-                </div>
-            </form>
+            <JoinForm 
+                onSubmit={onSubmit}
+                id={id}
+                onChangeId={onChangeId}
+                password={password}
+                onChangePassword={onChangePassword}
+                onChangePasswordCheck={onChangePasswordCheck}
+                passwordError={passwordError}
+            />
         </>
     );
 };
