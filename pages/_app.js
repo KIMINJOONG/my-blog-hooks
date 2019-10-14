@@ -11,6 +11,7 @@ import Helmet from 'react-helmet';
 import { Container } from 'next/app';
 import axios from 'axios';
 import { USER_DETAIL_REQUEST } from '../reducers/user';
+import 'antd/dist/antd.css';
 
 const MyBlog = ({ Component, store, pageProps }) => {
     return (
@@ -34,16 +35,6 @@ const MyBlog = ({ Component, store, pageProps }) => {
                   name: 'og:description', content: 'kohubi 블로그',
                 }, {
                   property: 'og:type', content: 'website',
-                }
-              ]}
-              link={[{
-                rel: 'shortcut icon', href: '/favicon.ico',
-                }, {
-                  rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/antd/3.16.2/antd.css',
-                }, {
-                  rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css',
-                }, {
-                  rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css',
                 }
               ]}
             />

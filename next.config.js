@@ -1,10 +1,12 @@
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
+const withSass = require('@zeit/next-sass');
+const withCSS = require('@zeit/next-css');
 const webpack = require('webpack');
 const CompressionPlugin = require('compression-webpack-plugin');
 
-module.exports = withBundleAnalyzer({
+const setting = withBundleAnalyzer({
   distDir: '.next',
   webpack(config) {
     const prod = process.env.NODE_ENV === 'production';
@@ -23,3 +25,5 @@ module.exports = withBundleAnalyzer({
     };
   },
 });
+
+module.exports = withCSS(setting);
