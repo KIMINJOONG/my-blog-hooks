@@ -1,7 +1,6 @@
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
-const withSass = require('@zeit/next-sass');
 const withCSS = require('@zeit/next-css');
 const webpack = require('webpack');
 const CompressionPlugin = require('compression-webpack-plugin');
