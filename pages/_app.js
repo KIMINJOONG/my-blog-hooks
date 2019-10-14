@@ -27,11 +27,11 @@ const MyBlog = ({ Component, store, pageProps }) => {
                 }, {
                   'http-equiv': 'X-UA-Compatible', content: 'IE=edge',
                 }, {
-                  name: 'description', content: '제로초의 NodeBird SNS',
+                  name: 'description', content: 'kohubi 블로그',
                 }, {
                   name: 'og:title', content: 'NodeBird',
                 }, {
-                  name: 'og:description', content: '제로초의 NodeBird SNS',
+                  name: 'og:description', content: 'kohubi 블로그',
                 }, {
                   property: 'og:type', content: 'website',
                 }
