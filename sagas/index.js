@@ -12,5 +12,5 @@ axios.defaults.baseURL = baseURL;
 // axios.defaults.baseURL = process.env.NODE_ENV === "production" ? 'http://kohubi.me:4000' : 'http://localhost:4000';
 
 export default function* rootSaga() {
-    yield all([call(user), call(board)], call(boards));
+    yield all([call(user), call(board), call(boards)]);
 };

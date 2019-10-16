@@ -3,7 +3,7 @@ import axios from 'axios';
 import { LOAD_BOARD_LIST_SUCCESS, LOAD_BOARD_LIST_FAILURE, LOAD_BOARD_LIST_REQUEST } from '../reducers/board';
 
 function loadBoardAPI(data) {
-    return axios.get(`boards/${data.categoryId}?searchValue=${encodeURI(data.searchValue)}`, {
+    return axios.get(`boards/${data.categoryId}?searchValue=${encodeURI(data.searchValue)}&page=${data.page}&pageNum=${data.pageNum}`, {
         withCredentials: true,
     });
 }

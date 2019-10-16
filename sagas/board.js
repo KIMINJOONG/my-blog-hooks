@@ -2,30 +2,30 @@ import { all, fork, takeLatest, put, call } from 'redux-saga/effects';
 import { UPLOAD_BOARD_REQUEST, UPLOAD_BOARD_FAILURE, UPLOAD_BOARD_SUCCESS, LOAD_BOARD_DETAIL_REQUEST, LOAD_BOARD_DETAIL_SUCCESS, LOAD_BOARD_DETAIL_FAILURE, DELETE_BOARD_SUCCESS, DELETE_BOARD_FAILURE, DELETE_BOARD_REQUEST, MODIFY_BOARD_SUCCESS, MODIFY_BOARD_FAILURE, MODIFY_BOARD_REQUEST, ADD_COMMENT_REQUEST, ADD_COMMENT_FAILURE, ADD_COMMENT_SUCCESS, SEARCH_BOARD_LIST_SUCCESS, SEARCH_BOARD_LIST_FAILURE, SEARCH_BOARD_LIST_REQUEST, UPLOAD_IMAGES_SUCCESS, UPLOAD_IMAGES_FAILURE, UPLOAD_IMAGES_REQUEST, REMOVE_IMAGE_REQUEST, REMOVE_IMAGE_FAILURE, REMOVE_IMAGE_SUCCESS, LOAD_BOARD_LIST_SUCCESS, LOAD_BOARD_LIST_FAILURE, LOAD_BOARD_LIST_REQUEST } from '../reducers/board';
 import axios from 'axios';
 
-function loadBoardAPI(data) {
-    return axios.get(`boards/${data.categoryId}?searchValue=${encodeURI(data.searchValue)}&page=${data.page}&pageNum=${data.pageNum}`, {
-        withCredentials: true,
-    });
-}
+// function loadBoardAPI(data) {
+//     return axios.get(`boards/${data.categoryId}?searchValue=${encodeURI(data.searchValue)}&page=${data.page}&pageNum=${data.pageNum}`, {
+//         withCredentials: true,
+//     });
+// }
 
-function* loadBoard(action) {
-    try {
-        const result = yield call(loadBoardAPI, action.data);
-        yield put({
-            type: LOAD_BOARD_LIST_SUCCESS,
-            data: result.data
-        });
-    }catch(error) {
-        yield put({
-            type: LOAD_BOARD_LIST_FAILURE,
-            error
-        });
-    }
-}
+// function* loadBoard(action) {
+//     try {
+//         const result = yield call(loadBoardAPI, action.data);
+//         yield put({
+//             type: LOAD_BOARD_LIST_SUCCESS,
+//             data: result.data
+//         });
+//     }catch(error) {
+//         yield put({
+//             type: LOAD_BOARD_LIST_FAILURE,
+//             error
+//         });
+//     }
+// }
 
-function* watchLoadBoards(){
-    yield takeLatest(LOAD_BOARD_LIST_REQUEST,loadBoard);
-}
+// function* watchLoadBoards(){
+//     yield takeLatest(LOAD_BOARD_LIST_REQUEST,loadBoard);
+// }
 
 function uploadBoardAPI(uploadBoardData) {
     return axios.post('/board', uploadBoardData, {
@@ -226,7 +226,6 @@ function* watchRemoveImage() {
 
 export default function* boardSaga() {
     yield all([
-        fork(watchLoadBoards),
         fork(watchUploadBoard),
         fork(watchLoadBoardDetail),
         fork(watchDeleteBoard),
