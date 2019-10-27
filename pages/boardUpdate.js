@@ -1,14 +1,13 @@
 import { useSelector, useDispatch } from 'react-redux';
 import BoardForm from "../components/BoardForm";
 import { useInput } from '../util';
-import { LOAD_BOARD_DETAIL_REQUEST, MODIFY_BOARD_REQUEST } from '../reducers/board';
+import { LOAD_BOARD_DETAIL_REQUEST, MODIFY_BOARD_REQUEST, REMOVE_IMAGE_REQUEST } from '../reducers/board';
 import { useCallback, useEffect, useRef } from 'react';
 import Router from 'next/router';
 import { message } from 'antd';
 
 const boardUpdate = () => {
     const { boardDetail, isModify } = useSelector(state => state.board);
-    console.log(boardDetail);
     const [ title, onChangeTitle ] = useInput(boardDetail.title);
     const [ content, onChangeContent ] = useInput(boardDetail.content);
     const [ category, onChangeCategory ] = useInput(boardDetail.category);

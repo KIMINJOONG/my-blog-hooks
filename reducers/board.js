@@ -57,6 +57,10 @@ const reducer = (state = initialState, action) => {
                 break;
             }
             case REMOVE_IMAGE_SUCCESS: {
+                if(draft.boardDetail) {
+                    const index = draft.boardDetail.images.findIndex((v, i) => i === action.data.index);
+                    draft.boardDetail.images.splice(index,1);
+                }
                 const index = draft.imagePaths.findIndex((v, i) => i === action.data.index);
                 draft.imagePaths.splice(index,1);
                 break;
