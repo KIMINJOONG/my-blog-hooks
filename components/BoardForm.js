@@ -15,7 +15,8 @@ const BoardForm = ({
     imagePaths,
     onRemoveImage,
     onChangeVideoUrl,
-    videoUrl
+    videoUrl,
+    images = [],
 }) => {
     return(
         <form onSubmit={onSubmitForm}>
@@ -42,6 +43,20 @@ const BoardForm = ({
                 <div onClick={onClickImageUpload}>이미지 업로드</div>
             </div>
             <div>
+                {images.map((image, i) => {
+                    return (
+                        <div key={image._id} style={{ display: "inline-block" }}>
+                        <img
+                            src={image.src}
+                            style={{ width: "200px" }}
+                            alt={image.src}
+                        />
+                        <div>
+                            <span onClick={onRemoveImage(images[i], i)}>제거</span>
+                        </div>
+                        </div>
+                    );
+                })}
                 {imagePaths.map((v, i) => {
                 return (
                     <div key={i} style={{ display: "inline-block" }}>

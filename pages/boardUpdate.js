@@ -8,6 +8,7 @@ import { message } from 'antd';
 
 const boardUpdate = () => {
     const { boardDetail, isModify } = useSelector(state => state.board);
+    console.log(boardDetail);
     const [ title, onChangeTitle ] = useInput(boardDetail.title);
     const [ content, onChangeContent ] = useInput(boardDetail.content);
     const [ category, onChangeCategory ] = useInput(boardDetail.category);
@@ -89,6 +90,7 @@ const boardUpdate = () => {
                 isUpdate={true}
                 onChangeVideoUrl={onChangeVideoUrl}
                 videoUrl={videoUrl}
+                images={boardDetail.images}
             />
         </div>
     );
