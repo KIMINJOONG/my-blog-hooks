@@ -83,13 +83,6 @@ const boards = () => {
     const dispatch = useDispatch();
     const { boards, totalCount } = useSelector(state => state.board);
     const [searchValue, onChangeSearchValue ] = useInput("");
-    // useEffect(() => {
-    //     dispatch({
-    //     type: LOAD_BOARD_LIST_REQUEST,
-    //     data: ''
-    //     });
-    // }, []);
-
     const onClickSearch = useCallback(value => {
         Router.push(`/boards/${categoryId}?searchValue=${value}&page=1&pageNum=10`);
     }, [searchValue]);

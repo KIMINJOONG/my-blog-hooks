@@ -68,14 +68,6 @@ const Board = () => {
         });
 
     }, []);
-
-
-    // useEffect(() => {
-        // if(isUpload) {
-            // Router.push('/boards/1');
-            // message.success('게시글이 등록되었습니다.');
-        // }
-    // })
     return (
         <div>
             <BoardForm 
