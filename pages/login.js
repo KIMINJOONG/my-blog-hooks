@@ -6,6 +6,7 @@ import Router from "next/router";
 import Link from 'next/link';
 import { message, Input, Row, Col } from 'antd';
 import { Button } from 'antd/lib/radio';
+import axios from 'axios';
 
 const Login = () => {
     const [id, onChangeId ] = useInput("");
@@ -15,15 +16,30 @@ const Login = () => {
 
     
 
-    const onSubmitForm = useCallback(e => {
+    const onSubmitForm = useCallback(async e => {
         e.preventDefault();
-        dispatch({
-            type: LOGIN_REUQEST,
-            data: {
-                id,
-                password
-            }
+        // dispatch({
+        //     type: LOGIN_REUQEST,
+        //     data: {
+        //         id,
+        //         password
+        //     }
+        // });
+        const loginData = {
+            id,
+            password
+        };
+        const result = await axios.post('/user/login', loginData, {
+            withCredentials: true
         });
+        if(result) {
+            if(!result.data.success) {
+                message.error(result.data.msg);
+            } else {
+                message.success('로그인 되었습니다.');
+                Router.push("/");
+            }
+        }
     }, [id, password]);
 
     const onKeyPress = (e) => {
