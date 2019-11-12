@@ -5,6 +5,7 @@ import Router from "next/router";
 import {useInput} from '../util';
 import { message } from 'antd';
 import JoinForm from '../components/JoinForm';
+import axios from 'axios';
 
 const Join = () => {
     const [passwordCheck, setPasswordCheck] = useState("");
@@ -26,19 +27,32 @@ const Join = () => {
     const [password, onChangePassword] = useInput("");
     const dispatch = useDispatch();
     
-    const onSubmit = useCallback(e => {
+    const onSubmit = useCallback(async e => {
         e.preventDefault();
         if(password !== passwordCheck) {
             return setPasswordError(true);
         }
-        dispatch(
-            joinUserAction({
-                id,
-                password,
-            }),
-        );
-        message.success('회원가입이 완료되었습니다.');
-        Router.push("/");
+        // dispatch(
+        //     joinUserAction({
+        //         id,
+        //         password,
+        //     }),
+        // );
+        const joinData = {
+            id,
+            password
+        }
+        const result = await axios.post('/user/', joinData, {
+            withCredentials: true
+        });
+        if(result.data.success === true) {
+            message.success('회원가입이 완료되었습니다.');
+            Router.push("/");
+        } else {
+            console.log(result);
+            message.error(result.data.msg);
+        }
+        
     },[password, passwordCheck]
     );
 
