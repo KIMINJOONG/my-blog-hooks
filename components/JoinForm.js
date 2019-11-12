@@ -21,7 +21,7 @@ export default ({
                     <Col md={8}>
                     </Col>
                     <Col md={8}>
-                        <JoinRow>
+                        <Row>
                             <Col>
                                 <Input 
                                     type="text" 
@@ -30,19 +30,19 @@ export default ({
                                     onChange={onChangeId}
                                 />
                             </Col>
-                        </JoinRow>
-                        <JoinRow>
+                        </Row>
+                        <Row>
                             <Col>
-                                <Input 
+                                <Input.Password
                                     type="password" 
                                     name="userPassword" 
                                     onChange={onChangePassword}
                                     placeholder="패스워드를 입력해주세요." />
                             </Col>
-                        </JoinRow>
-                        <JoinRow>
+                        </Row>
+                        <Row>
                             <Col>
-                                <Input 
+                                <Input.Password
                                     type="password" 
                                     name="userPassword2"
                                     onChange={onChangePasswordCheck} 
@@ -51,13 +51,13 @@ export default ({
                                     <div style={{ color: "red"}}>비밀번호가 일치하지 않습니다.</div>
                                 )}
                             </Col>
-                        </JoinRow>
-                        <JoinRow>
+                        </Row>
+                        <Row>
                             <Col>
                                 <Button onClick={onSubmit}>회원가입</Button>
                                 <Button onClick={() => Router.push('/login')}>취소</Button>
                             </Col>
-                        </JoinRow>
+                        </Row>
                         
                     </Col>
                     <Col md={8}>
