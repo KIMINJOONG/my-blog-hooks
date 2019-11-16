@@ -1,68 +1,65 @@
 import styled from 'styled-components';
 
 export const ContentHeaderContainer = styled.div`
+  width: 100%;
+
+  & div {
+    display: inline-block;
+  }
+
+  & .topContainer {
     width: 100%;
+    height: 50px;
 
     & div {
-        display: inline-block;
+      float: right;
+      cursor: pointer;
     }
+  }
 
-    & .topContainer {
-        width: 100%;
-        height: 50px;
+  & .top {
+    margin: 0px;
+    font-size: 20px;
+  }
 
-        & div {
-            float: right;
-            cursor: pointer;
-        }
+  & .contentContainer {
+    width: 100%;
+    height: 40px;
+    border-top: 1px solid #066306;
+    border-bottom: 1px solid #cecece;
+
+    & .title {
+      width: 80%;
+      line-height: 40px;
     }
-
-    & .top {
-        margin: 0px;
-        font-size: 20px;
-    }
-
-    & .contentContainer {
-        width: 100%;
-        height: 40px;
-        border-top: 1px solid #066306;
-        border-bottom: 1px solid #cecece;
-
-        & .title {
-            width: 80%;
-            line-height: 40px;
-        }
-        & .date {
-            width: 20%;
-            line-height: 40px;
-        }
-
-        & p {
-            margin: 0px;
-            text-align: center;
-        }
+    & .date {
+      width: 20%;
+      line-height: 40px;
     }
 
     & p {
-        font-family: SegoeUI;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        letter-spacing: normal;
-        text-align: left;
-        color: #707070;
+      margin: 0px;
+      text-align: center;
     }
+  }
+
+  & p {
+    font-family: SegoeUI;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    text-align: left;
+    color: #707070;
+  }
 `;
 
 export const TextInput = styled.input`
-    width: 100%;
-    margin-bottom: 10px;
+  width: 100%;
+  margin-bottom: 10px;
 `;
 
 export const ContentTextArea = styled.textarea`
-    width: 100%;
-    height: 500px;
+  width: 100%;
+  height: 500px;
 `;
-
-
-

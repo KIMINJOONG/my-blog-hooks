@@ -3,8 +3,8 @@ import user from './user';
 import board from './board';
 
 const rootReducer = combineReducers({
-    user,
-    board,
+  user,
+  board,
 });
 
 export default rootReducer;

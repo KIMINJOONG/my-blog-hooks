@@ -3,55 +3,66 @@ import withRedux from 'next-redux-wrapper';
 import withReduxSaga from 'next-redux-saga'; // 서버사이드렌더링시 필수
 import { Provider } from 'react-redux';
 import { createStore, compose, applyMiddleware } from 'redux';
-import reducer from '../reducers';
-import AppLayout from "../components/AppLayout";
+import AppLayout from '../components/AppLayout';
 import rootSaga from '../sagas';
-import createSagaMiddleware from "@redux-saga/core";
+import createSagaMiddleware from '@redux-saga/core';
 import Helmet from 'react-helmet';
 import { Container } from 'next/app';
 import axios from 'axios';
+import reducer from '../reducers';
 import { USER_DETAIL_REQUEST } from '../reducers/user';
 import 'antd/dist/antd.css';
 
-const MyBlog = ({ Component, store, pageProps }) => {
-    return (
-        <Container>
-            <Provider store={store}>
-            <Helmet
-              title="Kohubi's Blog"
-              htmlAttributes={{ lang: 'ko' }}
-              meta={[{
-                charset: 'UTF-8',
-                }, {
-                  name: 'viewport',
-                  content: 'width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=yes,viewport-fit=cover',
-                }, {
-                  'http-equiv': 'X-UA-Compatible', content: 'IE=edge',
-                }, {
-                  name: 'description', content: 'kohubi 블로그',
-                }, {
-                  name: 'og:title', content: 'NodeBird',
-                }, {
-                  name: 'og:description', content: 'kohubi 블로그',
-                }, {
-                  property: 'og:type', content: 'website',
-                }
-              ]}
-            />
-                <AppLayout>
-                    <Component {...pageProps} />
-                </AppLayout>
-            </Provider>
-        </Container>
-    );
-};
+const MyBlog = ({ Component, store, pageProps }) => (
+  <Container>
+    <Provider store={store}>
+      <Helmet
+        title="Kohubi's Blog"
+        htmlAttributes={{ lang: 'ko' }}
+        meta={[
+          {
+            charset: 'UTF-8',
+          },
+          {
+            name: 'viewport',
+            content:
+              'width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=yes,viewport-fit=cover',
+          },
+          {
+            'http-equiv': 'X-UA-Compatible',
+            content: 'IE=edge',
+          },
+          {
+            name: 'description',
+            content: 'kohubi 블로그',
+          },
+          {
+            name: 'og:title',
+            content: 'NodeBird',
+          },
+          {
+            name: 'og:description',
+            content: 'kohubi 블로그',
+          },
+          {
+            property: 'og:type',
+            content: 'website',
+          },
+        ]}
+      />
+      <AppLayout>
+        <Component {...pageProps} />
+      </AppLayout>
+    </Provider>
+  </Container>
+);
 
-MyBlog.getInitialProps = async (context) => {
+MyBlog.getInitialProps = async context => {
   const { ctx, Component } = context;
   let pageProps = {};
   const state = ctx.store.getState();
   const cookie = ctx.isServer ? ctx.req.headers.cookie : '';
-  //axios.defaults.headers.Cookie = '';
+  // axios.defaults.headers.Cookie = '';
   // Refused to set unsafe header "Cookie"
   // 이 부분은 클라이언트 사이드에서 쿠키를 세팅하려했을 때 나는 에러입니다. 서버사이드에서만 세팅할 수 있게 해야합니다.
   // 그래서 코드에서 if (option.isServer) { axios }로 감싸져 있습니다.
@@ -64,28 +75,27 @@ MyBlog.getInitialProps = async (context) => {
     });
   }
   if (Component.getInitialProps) {
-    pageProps = await Component.getInitialProps(ctx) || {};
+    pageProps = (await Component.getInitialProps(ctx)) || {};
   }
   return { pageProps };
-  
 };
-  
-  const configureStore = (initialState, options) => {
-    const sagaMiddleware = createSagaMiddleware();
-    const middlewares = [sagaMiddleware];
-    const enhancer =
-      process.env.NODE_ENV === "production"
-        ? compose(applyMiddleware(...middlewares))
-        : compose(
-            applyMiddleware(...middlewares),
-            !options.isServer &&
-              window.__REDUX_DEVTOOLS_EXTENSION__ !== "undefined"
-              ? window.__REDUX_DEVTOOLS_EXTENSION__()
-              : f => f
-          );
-    const store = createStore(reducer, initialState, enhancer);
-    store.sagaTask = sagaMiddleware.run(rootSaga); // 이부분도 서버사이드 렌더링
-    return store;
-  };
-  
-  export default withRedux(configureStore)(withReduxSaga(MyBlog)); //서버사이드 렌더링 withReduxSaga추가
+
+const configureStore = (initialState, options) => {
+  const sagaMiddleware = createSagaMiddleware();
+  const middlewares = [sagaMiddleware];
+  const enhancer =
+    process.env.NODE_ENV === 'production'
+      ? compose(applyMiddleware(...middlewares))
+      : compose(
+          applyMiddleware(...middlewares),
+          !options.isServer &&
+            window.__REDUX_DEVTOOLS_EXTENSION__ !== 'undefined'
+            ? window.__REDUX_DEVTOOLS_EXTENSION__()
+            : f => f,
+        );
+  const store = createStore(reducer, initialState, enhancer);
+  store.sagaTask = sagaMiddleware.run(rootSaga); // 이부분도 서버사이드 렌더링
+  return store;
+};
+
+export default withRedux(configureStore)(withReduxSaga(MyBlog)); // 서버사이드 렌더링 withReduxSaga추가
