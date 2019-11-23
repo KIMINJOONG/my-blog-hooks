@@ -6,7 +6,7 @@ import ContentHeader from '../components/ContentHeader';
 import { useCallback } from 'react';
 import { useInput } from '../util';
 import SearchForm from '../components/SearchForm';
-import { Pagination, Row, Col } from 'antd';
+import { Pagination, Row, Col, Button } from 'antd';
 
 const BoardsList = styled.div`
   width: 100%;
@@ -106,34 +106,41 @@ const boards = () => {
   return (
     <div>
       <div style={{ height: '660px' }}>
-        <ContentHeader
-          bigTitle={
-            categoryId === '1'
-              ? '일상'
-              : categoryId === '2'
-              ? '개발 관련'
-              : 'My Video'
-          }
-        />
         <Row>
-          {boards &&
-            boards.map(board => (
-              <BoardsList
-                key={board._id}
-                onClick={() => Router.push(`/board/${board._id}`)}
-              >
-                <div className="title">
-                  <p>{board.title}</p>
-                </div>
-                <div className="date">
-                  <p>
-                    {board.createdAt.length < 10
-                      ? board.createdAt
-                      : board.createdAt.substring(0, 10)}
-                  </p>
-                </div>
-              </BoardsList>
-            ))}
+          <Col>
+            <ContentHeader
+              bigTitle={
+                categoryId === '1'
+                  ? '일상'
+                  : categoryId === '2'
+                  ? '개발 관련'
+                  : 'My Video'
+              }
+            />
+          </Col>
+        </Row>
+
+        <Row>
+          <Col>
+            {boards &&
+              boards.map(board => (
+                <BoardsList
+                  key={board._id}
+                  onClick={() => Router.push(`/board/${board._id}`)}
+                >
+                  <div className="title">
+                    <p>{board.title}</p>
+                  </div>
+                  <div className="date">
+                    <p>
+                      {board.createdAt.length < 10
+                        ? board.createdAt
+                        : board.createdAt.substring(0, 10)}
+                    </p>
+                  </div>
+                </BoardsList>
+              ))}
+          </Col>
         </Row>
       </div>
       <Row>
