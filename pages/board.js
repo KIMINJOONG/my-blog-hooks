@@ -37,6 +37,24 @@ const Board = () => {
   const onSubmitForm = useCallback(
     e => {
       e.preventDefault();
+      if (content === '') {
+        message.error('내용을 입력해주세요.');
+        return;
+      }
+      if (title === '') {
+        message.error('제목을 입력해주세요.');
+        return;
+      }
+      if (category === '') {
+        message.error('카테고리를 선택해주세요.');
+        return;
+      }
+      if (category === '3') {
+        if (videoUrl === '') {
+          message.error('유튜브주소를 입력해주세요.');
+          return;
+        }
+      }
       const formData = new FormData();
       imagePaths.forEach(i => {
         formData.append('fileUrls', i);
