@@ -9,6 +9,7 @@ import {
 import BoardForm from '../components/BoardForm';
 import Router from 'next/router';
 import { message } from 'antd';
+import axios from 'axios';
 
 const Board = () => {
   const [title, onChangeTitle] = useInput('');
@@ -35,7 +36,7 @@ const Board = () => {
   }, [imageInput]);
 
   const onSubmitForm = useCallback(
-    e => {
+    async e => {
       e.preventDefault();
       if (content === '') {
         message.error('내용을 입력해주세요.');
@@ -63,10 +64,16 @@ const Board = () => {
       formData.append('title', title);
       formData.append('category', category);
       formData.append('videoUrl', videoUrl);
-      dispatch({
-        type: UPLOAD_BOARD_REQUEST,
-        data: formData,
+      // dispatch({
+      //   type: UPLOAD_BOARD_REQUEST,
+      //   data: formData,
+      // });
+      const result = await axios.post('/board', formData, {
+        withCredentials: true,
       });
+      if (result && result.data && result.data.success) {
+        Router.push('/boards/1');
+      }
     },
     [title, content, category, videoUrl],
   );
