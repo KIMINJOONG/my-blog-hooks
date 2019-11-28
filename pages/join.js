@@ -28,15 +28,17 @@ const Join = () => {
   const onSubmit = useCallback(
     async e => {
       e.preventDefault();
+      if (id === '') {
+        message.error('아이디를 입력해주세요');
+        return;
+      }
+      if (password === '') {
+        message.error('비밀번호를 입력해주세요');
+        return;
+      }
       if (password !== passwordCheck) {
         return setPasswordError(true);
       }
-      // dispatch(
-      //     joinUserAction({
-      //         id,
-      //         password,
-      //     }),
-      // );
       const joinData = {
         id,
         password,

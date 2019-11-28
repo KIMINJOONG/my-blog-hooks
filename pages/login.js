@@ -17,13 +17,14 @@ const Login = () => {
   const onSubmitForm = useCallback(
     async e => {
       e.preventDefault();
-      // dispatch({
-      //     type: LOGIN_REUQEST,
-      //     data: {
-      //         id,
-      //         password
-      //     }
-      // });
+      if (id === '') {
+        message.error('아이디를 입력해주세요');
+        return;
+      }
+      if (password === '') {
+        message.error('비밀번호를 입력해주세요');
+        return;
+      }
       const loginData = {
         id,
         password,
