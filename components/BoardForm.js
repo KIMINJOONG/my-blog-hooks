@@ -1,7 +1,5 @@
 import { ContentTextArea, TextInput } from '../styled/common';
 import { useCallback, useRef, useState, useEffect } from 'react';
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import EditorComponent from './EditorComponent';
 
 const BoardForm = ({
   onChangeTitle,
@@ -79,7 +77,6 @@ const BoardForm = ({
           onChange={onChangeContent}
           placeholder="내용을 입력해주세요."
         />
-        <EditorComponent />
       </div>
       <div>
         {isUpdate ? <button>게시글 수정</button> : <button>게시글 등록</button>}
