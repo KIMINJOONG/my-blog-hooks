@@ -64,10 +64,6 @@ const Board = () => {
       formData.append('title', title);
       formData.append('category', category);
       formData.append('videoUrl', videoUrl);
-      // dispatch({
-      //   type: UPLOAD_BOARD_REQUEST,
-      //   data: formData,
-      // });
       const result = await axios.post('/board', formData, {
         withCredentials: true,
       });

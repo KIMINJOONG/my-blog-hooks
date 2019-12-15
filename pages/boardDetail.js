@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import Router from 'next/router';
@@ -28,7 +28,7 @@ const boardDetail = () => {
   const { boardDetail } = useSelector(state => state.board);
   const { userInfo } = useSelector(state => state.user);
   const dispatch = useDispatch();
-  const [comment, onChangeComment] = useInput('');
+  const [comment, setComment] = useState('');
 
   const onDeleteBoard = useCallback(boardId => () => {
     dispatch({
@@ -39,6 +39,9 @@ const boardDetail = () => {
     Router.push('/boards');
   });
 
+  const onChangeComment = useCallback(e => {
+    setComment(e.target.value);
+  }, []);
   const postComment = useCallback(() => {
     if (userInfo) {
       const {
@@ -53,6 +56,7 @@ const boardDetail = () => {
           boardId,
         },
       });
+      setComment('');
     } else {
       message.error('로그인이 필요합니다.');
     }
