@@ -1,4 +1,4 @@
-import { useCallback, useRef, useEffect } from 'react';
+import { useCallback, useRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useInput } from '../util';
 import {
@@ -16,6 +16,7 @@ const Board = () => {
   const [content, onChangeContent] = useInput('');
   const [category, onChangeCategory] = useInput('');
   const [videoUrl, onChangeVideoUrl] = useInput('');
+  const [editorHtml, setEditorHtml] = useState('');
   const { imagePaths, isUpload } = useSelector(state => state.board);
   const dispatch = useDispatch();
   const imageInput = useRef();
@@ -38,7 +39,7 @@ const Board = () => {
   const onSubmitForm = useCallback(
     async e => {
       e.preventDefault();
-      if (content === '') {
+      if (editorHtml === '') {
         message.error('내용을 입력해주세요.');
         return;
       }
@@ -60,10 +61,10 @@ const Board = () => {
       imagePaths.forEach(i => {
         formData.append('fileUrls', i);
       });
-      formData.append('content', content);
       formData.append('title', title);
       formData.append('category', category);
       formData.append('videoUrl', videoUrl);
+      formData.append('content', editorHtml);
       const result = await axios.post('/board', formData, {
         withCredentials: true,
       });
@@ -71,7 +72,7 @@ const Board = () => {
         Router.push('/boards/1');
       }
     },
-    [title, content, category, videoUrl],
+    [title, content, category, videoUrl, editorHtml],
   );
 
   // 패턴
@@ -94,6 +95,10 @@ const Board = () => {
     },
     [],
   );
+  const handleChange = html => {
+    setEditorHtml(html);
+    console.log(editorHtml);
+  };
   return (
     <div>
       <BoardForm
@@ -111,6 +116,8 @@ const Board = () => {
         onRemoveImage={onRemoveImage}
         onChangeVideoUrl={onChangeVideoUrl}
         videoUrl={videoUrl}
+        handleChange={handleChange}
+        editorHtml={editorHtml}
       />
     </div>
   );

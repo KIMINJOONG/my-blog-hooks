@@ -1,5 +1,6 @@
 import { ContentTextArea, TextInput } from '../styled/common';
 import { useCallback, useRef, useState, useEffect } from 'react';
+import EditorComponent from '../components/EditorComponent';
 
 const BoardForm = ({
   onChangeTitle,
@@ -18,6 +19,8 @@ const BoardForm = ({
   onChangeVideoUrl,
   videoUrl,
   images = [],
+  handleChange,
+  editorHtml,
 }) => {
   return (
     <form onSubmit={onSubmitForm}>
@@ -71,12 +74,7 @@ const BoardForm = ({
         })}
       </div>
       <div>
-        <ContentTextArea
-          name="content"
-          value={content}
-          onChange={onChangeContent}
-          placeholder="내용을 입력해주세요."
-        />
+        <EditorComponent handleChange={handleChange} editorHtml={editorHtml} />
       </div>
       <div>
         {isUpdate ? <button>게시글 수정</button> : <button>게시글 등록</button>}

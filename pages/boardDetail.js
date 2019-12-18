@@ -12,6 +12,7 @@ import {
   DELETE_BOARD_REQUEST,
   ADD_COMMENT_REQUEST,
 } from '../reducers/board';
+import Parser from 'html-react-parser';
 
 const ButtonContainer = styled.div``;
 
@@ -67,16 +68,7 @@ const boardDetail = () => {
       {boardDetail && (
         <div>
           <Typography.Title>{boardDetail.title}</Typography.Title>
-          <Typography.Text>
-            {boardDetail.content &&
-              boardDetail.content.length > 0 &&
-              boardDetail.content.split('\n').map((line, index) => (
-                <span key={index}>
-                  {line}
-                  <br />
-                </span>
-              ))}
-          </Typography.Text>
+          {<div>{boardDetail && Parser(boardDetail.content)}</div>}
           <div>
             {boardDetail.images &&
               boardDetail.images.map(image => (
@@ -113,6 +105,7 @@ const boardDetail = () => {
             </Row>
           )}
           <hr />
+
           {boardDetail.comments.map((comments, index) => (
             <div key={index}>
               <span>{comments.creator.id} :</span>
