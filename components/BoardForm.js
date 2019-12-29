@@ -74,7 +74,11 @@ const BoardForm = ({
         })}
       </div>
       <div>
-        <EditorComponent handleChange={handleChange} editorHtml={editorHtml} />
+        <EditorComponent
+          handleChange={handleChange}
+          editorHtml={editorHtml}
+          division={1}
+        />
       </div>
       <div>
         {isUpdate ? <button>게시글 수정</button> : <button>게시글 등록</button>}

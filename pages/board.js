@@ -97,7 +97,6 @@ const Board = () => {
   );
   const handleChange = html => {
     setEditorHtml(html);
-    console.log(editorHtml);
   };
   return (
     <div>

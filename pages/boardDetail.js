@@ -13,6 +13,7 @@ import {
   ADD_COMMENT_REQUEST,
 } from '../reducers/board';
 import Parser from 'html-react-parser';
+import EditorComponent from '../components/EditorComponent';
 
 const ButtonContainer = styled.div``;
 
@@ -68,7 +69,16 @@ const boardDetail = () => {
       {boardDetail && (
         <div>
           <Typography.Title>{boardDetail.title}</Typography.Title>
-          {<div>{boardDetail && Parser(boardDetail.content)}</div>}
+          {
+            <div>
+              {boardDetail && (
+                <EditorComponent
+                  editorHtml={boardDetail.content}
+                  division={2}
+                />
+              )}
+            </div>
+          }
           <div>
             {boardDetail.images &&
               boardDetail.images.map(image => (

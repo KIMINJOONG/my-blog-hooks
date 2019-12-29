@@ -14,19 +14,27 @@ export default class Editor extends Component {
     if (typeof window !== 'undefined' && ReactQuill) {
       return (
         <div>
-          <ReactQuill
-            theme={'snow'}
-            onChange={this.props.handleChange}
-            value={this.props.editorHtml}
-            modules={Editor.modules}
-            formats={Editor.formats}
-            bounds={'.app'}
-            placeholder={'내용을 입력해주세요'}
-          />
+          {this.props.division === 1 ? (
+            <ReactQuill
+              theme={'snow'}
+              onChange={this.props.handleChange}
+              value={this.props.editorHtml}
+              modules={Editor.modules}
+              formats={Editor.formats}
+              bounds={'.app'}
+              placeholder={'내용을 입력해주세요'}
+            />
+          ) : (
+            <ReactQuill
+              value={this.props.editorHtml}
+              theme={'bubble'}
+              readOnly={true}
+            />
+          )}
         </div>
       );
     } else {
-      return <textarea />;
+      return <span>내용 불러오는중</span>;
     }
   }
 }
