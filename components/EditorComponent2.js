@@ -4,7 +4,6 @@ const EditorComponent2 = () => {
   const [theme, setTheme] = useState(null);
   if (typeof window !== 'undefined') {
     this.ReactQuill = require('react-quill');
-    console.log(this.ReactQuill);
   }
 
   const handleChange = html => {

@@ -69,7 +69,7 @@ MyBlog.getInitialProps = async context => {
   if (ctx.isServer && cookie) {
     axios.defaults.headers.Cookie = cookie;
   }
-  if (!state.user.me) {
+  if (!state.user.userInfo) {
     ctx.store.dispatch({
       type: USER_DETAIL_REQUEST,
     });
