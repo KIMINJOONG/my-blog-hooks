@@ -138,8 +138,7 @@ const boardDetail = () => {
               )}
             </div>
           </div>
-
-          {userInfo && userInfo.id === 'master' && (
+          {userInfo && userInfo.data.id === 'master' && (
             <ButtonContainer>
               <Button
                 type="primary"

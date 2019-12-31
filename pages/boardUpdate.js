@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import BoardForm from '../components/BoardForm';
 import { useInput } from '../util';
 import {
@@ -16,6 +16,7 @@ const boardUpdate = () => {
   const [content, onChangeContent] = useInput(boardDetail.content);
   const [category, onChangeCategory] = useInput(boardDetail.category);
   const [videoUrl, onChangeVideoUrl] = useInput(boardDetail.videoUrl);
+  const [editorHtml, setEditorHtml] = useState('');
   const { imagePaths } = useSelector(state => state.board);
   const dispatch = useDispatch();
   const onSubmitForm = useCallback(
@@ -31,13 +32,13 @@ const boardUpdate = () => {
         data: {
           boardId,
           title,
-          content,
+          content: editorHtml,
           videoUrl,
           category,
         },
       });
     },
-    [title, content, videoUrl, category],
+    [title, editorHtml, videoUrl, category],
   );
 
   const imageInput = useRef();
@@ -79,11 +80,17 @@ const boardUpdate = () => {
   );
 
   useEffect(() => {
+    if (boardDetail) {
+      setEditorHtml(boardDetail.content);
+    }
     if (isModify) {
       message.success('게시글이 수정되었습니다.');
     }
-  });
+  }, [boardDetail]);
 
+  const handleChange = html => {
+    setEditorHtml(html);
+  };
   return (
     <div>
       <BoardForm
@@ -103,6 +110,8 @@ const boardUpdate = () => {
         onChangeVideoUrl={onChangeVideoUrl}
         videoUrl={videoUrl}
         images={boardDetail.images}
+        handleChange={handleChange}
+        editorHtml={editorHtml}
       />
     </div>
   );

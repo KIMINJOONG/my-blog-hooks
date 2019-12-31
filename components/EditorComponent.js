@@ -43,7 +43,8 @@ Editor.modules = {
   toolbar: [
     [{ header: '1' }, { header: '2' }, { font: [] }],
     [{ size: [] }],
-    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    [{ color: [] }],
+    ['bold', 'italic', 'underline', 'strike', 'blockquote', 'code-block'],
     [
       { list: 'ordered' },
       { list: 'bullet' },
@@ -71,6 +72,8 @@ Editor.formats = [
   'underline',
   'strike',
   'blockquote',
+  'code-block',
+  'color',
   'list',
   'bullet',
   'indent',
